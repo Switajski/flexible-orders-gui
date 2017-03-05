@@ -1,6 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
+import LineItem from './LineItem'
 
 export default (props) => {
-    return (<div>{props.id}</div>)
+    
+    return (<div>{props.id}
+        {props.items.map(item => (
+            <LineItem {...item} />
+        ))}
+    </div>)
 } 
