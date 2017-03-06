@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import logo from './logo.svg';
 import DocumentList from './DocumentList';
@@ -22,6 +22,10 @@ const Header = styled.div`
   padding: 20px;
   color: white;`
 
+const Content = styled.div`
+  background-color: #DDD;
+  border: 1em;`
+
 class App extends Component {
   render() {
     return (
@@ -30,7 +34,9 @@ class App extends Component {
           <Logo src={logo} alt="logo" />
           <h2>Flexible Orders</h2>
         </Header>
-        <DocumentList documents={this.props.documents}/>
+        <Content>
+          <DocumentList documents={this.props.documents} />
+        </Content>
       </GlobalStyled>
     );
   }
