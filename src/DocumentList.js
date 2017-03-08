@@ -1,19 +1,18 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Row, Col, Card } from 'elemental'
+import { Card } from 'elemental'
 
 import Document from './Document'
 import withDueFilter from './withDueFilter'
 
 export default (props) => {
 
-    return (<Col>
+    return (<div>
         {Object.keys(props.documents).map(key => {
             const DocumentWithDueFilter = withDueFilter(Document);
-            return (<Card>
-                <DocumentWithDueFilter key={key} {...props.documents[key]} />
+            return (<Card key={key}>
+                <DocumentWithDueFilter {...props.documents[key]} />
             </Card>)
         })}
-    </Col>)
+    </div>)
 }
 
