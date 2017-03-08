@@ -10,21 +10,28 @@ const applogospin = keyframes`
   to { transform: rotate(360deg); }`
 
 const GlobalStyled = styled.div`
-  text-align: center;`
+  background-color: #DDD;`
 
 const Logo = styled.img`
   animation: ${applogospin} infinite 20s linear;
   height: 80px;`
 
+const H2 = styled.h2`
+  color: white;`
+
 const Header = styled.div`
   background-color: #222;
+  text-align: center;
   height: 150px;
   padding: 20px;
   color: white;`
 
 const Content = styled.div`
-  background-color: #DDD;
-  border: 1em;`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 768px;
+  padding-left: 20px;
+  padding-right: 20px;`
 
 class App extends Component {
   render() {
@@ -32,9 +39,10 @@ class App extends Component {
       <GlobalStyled>
         <Header>
           <Logo src={logo} alt="logo" />
-          <h2>Flexible Orders</h2>
+          <H2>Flexible Orders</H2>
         </Header>
         <Content>
+          <br/>
           <DocumentList documents={this.props.documents} />
         </Content>
       </GlobalStyled>

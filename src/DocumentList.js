@@ -1,19 +1,19 @@
 import React from 'react'
+import styled from 'styled-components'
+import { Row, Col, Card } from 'elemental'
+
 import Document from './Document'
 import withDueFilter from './withDueFilter'
-import styled from 'styled-components'
-
-const Grid = styled.div`
-    display: grid
-`
 
 export default (props) => {
 
-    return (<Grid>
+    return (<Col>
         {Object.keys(props.documents).map(key => {
             const DocumentWithDueFilter = withDueFilter(Document);
-            return (<DocumentWithDueFilter key={key} {...props.documents[key]}/>)
+            return (<Card>
+                <DocumentWithDueFilter key={key} {...props.documents[key]} />
+            </Card>)
         })}
-    </Grid>)
+    </Col>)
 }
 

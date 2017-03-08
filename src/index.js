@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
 
-import './index.css';
+import './styles.min.css';
 
 let store = createStore(
   reducer,
