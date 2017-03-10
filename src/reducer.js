@@ -1,11 +1,12 @@
 import documents from './documents'
 
-let indexedDocs = {};
+const indexedDocs = {};
+const childrenByParent = {};
 documents.forEach((doc) => {
     indexedDocs[doc['id']] = doc
 })
 
-export default (state = {documents: indexedDocs}, action) => {
+export default (state = { documents: indexedDocs }, action) => {
     switch (action.type) {
         case 'REQUEST_PICTURE':
             return state;

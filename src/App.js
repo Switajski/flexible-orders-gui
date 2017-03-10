@@ -35,6 +35,15 @@ const Content = styled.div`
 
 class App extends Component {
   render() {
+    const childrenByParent = {};
+    Object.keys(this.props.documents).forEach(key => this.props.documents[key].items.forEach(item => {
+      if (item.predecessor) {
+        if (childrenByParent[item.predecessor] === undefined)
+          childrenByParent[item.predecessor] = []
+        childrenByParent[item.predecessor].push(item);
+      }
+    }))
+
     return (
       <GlobalStyled>
         <Header>
@@ -42,8 +51,8 @@ class App extends Component {
           <H2>Flexible Orders</H2>
         </Header>
         <Content>
-          <br/>
-          <DocumentList documents={this.props.documents} />
+          <br />
+          <DocumentList documents={this.props.documents} childrenByParent={childrenByParent} />
         </Content>
       </GlobalStyled>
     );

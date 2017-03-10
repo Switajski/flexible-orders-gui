@@ -8,10 +8,12 @@ export default (props) => {
 
     return (<div>
         {Object.keys(props.documents).map(key => {
-            const DocumentWithDueFilter = withDueFilter(Document);
-            return (<Card key={key}>
-                <DocumentWithDueFilter {...props.documents[key]} />
-            </Card>)
+            const doc = props.documents[key];
+            const CardWithDueFilter = withDueFilter(Card, doc, props.childrenByParent);
+
+            return (<CardWithDueFilter key={key}>
+                <Document {...doc} />
+            </CardWithDueFilter>)
         })}
     </div>)
 }
