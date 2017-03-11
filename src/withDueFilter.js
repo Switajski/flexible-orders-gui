@@ -1,4 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
+import withOverlay from './Components/withOverlay'
+
+const H2AlignedInMiddle = styled.h2`
+    text-align:center;
+    vertical-align: middle;`
 
 export default (Component, document, childrenByParent) => {
     let due = false;
@@ -16,5 +22,9 @@ export default (Component, document, childrenByParent) => {
         return (props) =>
             (<Component {...props} />)
 
-    return () => (<div></div>);
+    const ComponentWithOverlay = withOverlay(Component, <H2AlignedInMiddle>Done</H2AlignedInMiddle>);
+
+    return (props) => (
+        <ComponentWithOverlay {...props} />
+    )
 }
