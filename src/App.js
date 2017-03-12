@@ -48,6 +48,7 @@ class App extends Component {
         return this.props.dispatch(showDueItemsOnly)
       case DUE_ITEMS_FILTER_CLEAR:
         return this.props.dispatch(dueItemsFilterClear)
+      default: return false;
     }
   }
 

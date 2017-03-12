@@ -1,7 +1,7 @@
-import isDue from './documentIsDueSpecification';
+import isDue from '../documentIsDueSpecification';
 
-import initialState from './initialState';
-import indexOnChildrenByParent from './childrenByParent'
+import initialState from '../initialState';
+import indexOnChildrenByParent from '../childrenByParent'
 
 const childrenByParent = indexOnChildrenByParent(initialState.documents);
 

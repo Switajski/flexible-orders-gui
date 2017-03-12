@@ -6,11 +6,9 @@ export default (document, childrenByParent) => {
         } else {
             const summedQtyOfChildren =
                 childrenByParent[item.id].reduce((acc, child) => acc + child.quantity);
-            if (summedQtyOfChildren < item.quantity)
-                return true;
+            return (summedQtyOfChildren < item.quantity)
         }
     })
-
 
     return dues.reduce((acc = false, bool) => {
         if (bool)

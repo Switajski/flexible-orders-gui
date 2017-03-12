@@ -17,11 +17,15 @@ export default (props) => {
         {Object.keys(props.documents).map(key => {
             const doc = props.documents[key];
             const due = isDue(doc, props.childrenByParent)
-            if (due && (props.filter == SHOW_DUE_ITEMS_ONLY)) {
-                return <Card key={key}><Document {...doc} /></Card>
+            if (props.filter === SHOW_DUE_ITEMS_ONLY) {
+                if (due) {
+                    return <Card key={key}><Document {...doc} /></Card>
+                } else {
+                    return <div key={key} />
+                }
             }
 
-            if (!due && props.filter == DUE_MARK_DONE) {
+            if (!due && props.filter === DUE_MARK_DONE) {
                 const ComponentWithOverlay = withOverlay(Document, <H2AlignedInMiddle>Done</H2AlignedInMiddle>);
                 return (props) => (<ComponentWithOverlay {...props} key={key} />)
             }
