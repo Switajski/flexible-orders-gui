@@ -6,6 +6,7 @@ import logo from './logo.svg'
 import DocumentList from './DocumentList'
 import { Dropdown } from 'elemental'
 
+import indexOnChildrenByParent from './childrenByParent'
 import {
   showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
   dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR
@@ -47,20 +48,12 @@ class App extends Component {
         return this.props.dispatch(showDueItemsOnly)
       case DUE_ITEMS_FILTER_CLEAR:
         return this.props.dispatch(dueItemsFilterClear)
-      default: return false;
     }
   }
 
 
   render() {
-    const childrenByParent = {};
-    Object.keys(this.props.documents).forEach(key => this.props.documents[key].items.forEach(item => {
-      if (item.predecessor) {
-        if (childrenByParent[item.predecessor] === undefined)
-          childrenByParent[item.predecessor] = []
-        childrenByParent[item.predecessor].push(item);
-      }
-    }))
+    const childrenByParent = indexOnChildrenByParent(this.props.documents);
 
     return (
       <GlobalStyled>

@@ -1,3 +1,11 @@
+/**
+ * B11 
+ *  10 x Amy Fleece -> AB11 10 ->
+ *  15 x Miladka athra stars lime -> AB11 15
+ *  30 x Paul anthra dots -> AB11 30
+ * 
+ */
+
 export default [
     {
         "id": "B11",
