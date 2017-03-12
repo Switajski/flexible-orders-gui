@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { Component } from 'react'
+import styled, { keyframes } from 'styled-components'
 import { connect } from 'react-redux'
 
-import logo from './logo.svg';
-import DocumentList from './DocumentList';
+import logo from './logo.svg'
+import DocumentList from './DocumentList'
+import { Dropdown } from 'elemental'
+
+import {
+  showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
+  dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR
+} from './Actions'
 
 const applogospin = keyframes`
  from { transform: rotate(0deg); }
@@ -34,6 +40,18 @@ const Content = styled.div`
   padding-right: 20px;`
 
 class App extends Component {
+
+  onDueDropdownSelect = (event) => {
+    switch (event) {
+      case SHOW_DUE_ITEMS_ONLY:
+        return this.props.dispatch(showDueItemsOnly)
+      case DUE_ITEMS_FILTER_CLEAR:
+        return this.props.dispatch(dueItemsFilterClear)
+      default: return false;
+    }
+  }
+
+
   render() {
     const childrenByParent = {};
     Object.keys(this.props.documents).forEach(key => this.props.documents[key].items.forEach(item => {
@@ -51,8 +69,16 @@ class App extends Component {
           <H2>Flexible Orders</H2>
         </Header>
         <Content>
-          <br />
-          <DocumentList documents={this.props.documents} childrenByParent={childrenByParent} />
+          <Dropdown
+            items={[
+              { label: 'Show due items only', value: SHOW_DUE_ITEMS_ONLY },
+              { label: 'Clear filter', value: DUE_ITEMS_FILTER_CLEAR }]}
+            buttonLabel='Due items filter'
+            onSelect={this.onDueDropdownSelect}
+          />
+          <DocumentList documents={this.props.documents}
+            childrenByParent={childrenByParent}
+            filter={this.props.filter} />
         </Content>
       </GlobalStyled>
     );

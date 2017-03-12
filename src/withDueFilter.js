@@ -7,6 +7,19 @@ const H2AlignedInMiddle = styled.h2`
     vertical-align: middle;`
 
 export default (Component, document, childrenByParent) => {
+    
+    if (isDue(document, childrenByParent))
+        return (props) =>
+            (<Component {...props} />)
+
+    const ComponentWithOverlay = withOverlay(Component, <H2AlignedInMiddle>Done</H2AlignedInMiddle>);
+
+    return (props) => (
+        <ComponentWithOverlay {...props} />
+    )
+}
+
+export function isDue(document, childrenByParent){
     let due = false;
     document.items.forEach(item => {
         if (childrenByParent[item.id]) {
@@ -18,13 +31,5 @@ export default (Component, document, childrenByParent) => {
             due = true;
         }
     })
-    if (due)
-        return (props) =>
-            (<Component {...props} />)
-
-    const ComponentWithOverlay = withOverlay(Component, <H2AlignedInMiddle>Done</H2AlignedInMiddle>);
-
-    return (props) => (
-        <ComponentWithOverlay {...props} />
-    )
+    return due
 }
