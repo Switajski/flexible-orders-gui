@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import logo from './logo.svg'
 import DocumentList from './DocumentList'
-import { Dropdown } from 'elemental'
+import { Pill } from 'elemental'
 
 import indexOnChildrenByParent from './childrenByParent'
 import {
@@ -52,6 +52,14 @@ class App extends Component {
     }
   }
 
+  clearFilterDueItems = (evt, button) => {
+    this.props.dispatch(dueItemsFilterClear);
+  }
+
+  filterDueItems = (evt, button) => {
+    this.props.dispatch(showDueItemsOnly);
+  } 
+
 
   render() {
     const childrenByParent = indexOnChildrenByParent(this.props.documents);
@@ -63,13 +71,8 @@ class App extends Component {
           <H2>Flexible Orders</H2>
         </Header>
         <Content>
-          <Dropdown
-            items={[
-              { label: 'Show due items only', value: SHOW_DUE_ITEMS_ONLY },
-              { label: 'Clear filter', value: DUE_ITEMS_FILTER_CLEAR }]}
-            buttonLabel='Due items filter'
-            onSelect={this.onDueDropdownSelect}
-          />
+          <br />
+          <Pill label='due items only' type="primary" onClear={this.clearFilterDueItems} onClick={this.filterDueItems}/> 
           <DocumentList documents={this.props.documents}
             childrenByParent={childrenByParent}
             filter={this.props.filter} />

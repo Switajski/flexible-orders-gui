@@ -5,4 +5,4 @@ documents.forEach((doc) => {
     indexedDocs[doc['id']] = doc
 })
 
-export default { documents: indexedDocs, filter: undefined }
+export default { documents: indexedDocs, filter: [] }
