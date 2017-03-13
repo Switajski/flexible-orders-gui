@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { connect } from 'react-redux'
 
 import logo from './logo.svg'
 import DocumentList from './DocumentList'
-import { Pill } from 'elemental'
-
-import indexOnChildrenByParent from './childrenByParent'
-import {
-  showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
-  dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR
-} from './Actions'
 
 const applogospin = keyframes`
  from { transform: rotate(0deg); }
@@ -42,27 +34,7 @@ const Content = styled.div`
 
 class App extends Component {
 
-  onDueDropdownSelect = (event) => {
-    switch (event) {
-      case SHOW_DUE_ITEMS_ONLY:
-        return this.props.dispatch(showDueItemsOnly)
-      case DUE_ITEMS_FILTER_CLEAR:
-        return this.props.dispatch(dueItemsFilterClear)
-      default: return false;
-    }
-  }
-
-  clearFilterDueItems = (evt, button) => {
-    this.props.dispatch(dueItemsFilterClear);
-  }
-
-  filterDueItems = (evt, button) => {
-    this.props.dispatch(showDueItemsOnly);
-  } 
-
-
   render() {
-    const childrenByParent = indexOnChildrenByParent(this.props.documents);
 
     return (
       <GlobalStyled>
@@ -72,14 +44,11 @@ class App extends Component {
         </Header>
         <Content>
           <br />
-          <Pill label='due items only' type="primary" onClear={this.clearFilterDueItems} onClick={this.filterDueItems}/> 
-          <DocumentList documents={this.props.documents}
-            childrenByParent={childrenByParent}
-            filter={this.props.filter} />
+          <DocumentList />
         </Content>
       </GlobalStyled>
     );
   }
 }
 
-export default connect(state => state)(App);
+export default App;

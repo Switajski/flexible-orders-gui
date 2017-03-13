@@ -1,4 +1,4 @@
-import { SHOW_DUE_ITEMS_ONLY, DUE_ITEMS_FILTER_CLEAR, DUE_MARK_DONE } from './Actions'
+import { SHOW_DUE_ITEMS_ONLY, DUE_ITEMS_FILTER_CLEAR, DUE_MARK_DONE } from './actions'
 import initialState from './initialState'
 
 export default (state = initialState, action) => {
@@ -12,8 +12,6 @@ export default (state = initialState, action) => {
             return { ...state, filter: filter2 }
         case DUE_MARK_DONE:
             return { ...state, filter: DUE_MARK_DONE }
-        case 'REQUEST_PICTURE':
-            return state;
         default:
             return state;
     }
