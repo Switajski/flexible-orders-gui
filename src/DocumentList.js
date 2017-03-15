@@ -6,7 +6,7 @@ import { Pill } from 'elemental'
 
 import indexOnChildrenByParent from './childrenByParent'
 import Document from './Document'
-import isDue from './documentIsDueSpecification'
+import { documentIsDue } from './isDueSpecification'
 import { withOverlay } from './Components/withOverlay'
 import {
     showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
@@ -42,12 +42,18 @@ export class DocumentList extends Component {
     render = () => {
         const childrenByParent = indexOnChildrenByParent(this.props.documents);
 
-        const items = Object.keys(this.props.documents).map(key => {
+        const docs = Object.keys(this.props.documents).map(key => {
             const doc = this.props.documents[key];
-            const due = isDue(doc, childrenByParent)
+            const due = documentIsDue(doc, childrenByParent)
+
+            const DocumentInCard =
+                <Card key={key}>
+                    <Document childrenByParent={childrenByParent} document={doc} filter={this.props.filter} />
+                </Card>
+
             if (this.props.filter.includes(SHOW_DUE_ITEMS_ONLY)) {
                 if (due) {
-                    return <Card key={key}><Document {...doc} /></Card>
+                    return DocumentInCard
                 } else {
                     return <div key={key} />
                 }
@@ -57,8 +63,7 @@ export class DocumentList extends Component {
                 const ComponentWithOverlay = withOverlay(Document, <H2AlignedInMiddle>Done</H2AlignedInMiddle>);
                 return (props) => (<ComponentWithOverlay {...props} key={key} />)
             }
-
-            return <Card key={key}><Document {...doc} /></Card>
+            return DocumentInCard
         })
 
         return (
@@ -67,7 +72,7 @@ export class DocumentList extends Component {
                 onClick={this.filterDueItems} />
 
                 <div>
-                    {items}
+                    {docs}
                 </div >
             </div>)
     }

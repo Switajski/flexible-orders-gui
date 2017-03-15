@@ -4,6 +4,11 @@
  *  15 x Miladka athra stars lime -> AB11 15
  *  30 x Paul anthra dots -> AB11 30
  * 
+ * R11:
+ * Pos. 1: 48#ShippingItem 3 -> 59#InvoiceItem 3 p:48
+ * Pos. 2: 45#ShippingItem 2 -> 60#InvoiceItem 2 p:45
+ * Pos. 3: 49#ShippingItem 3 -> 61#InvoiceItem 3 p:49
+ * Pos. 4: 46#ShippingItem 2 -> 62#InvoiceItem 2 p:46
  */
 
 export default [

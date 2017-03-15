@@ -40,7 +40,6 @@ class App extends Component {
       <GlobalStyled>
         <Header>
           <Logo src={logo} alt="logo" />
-          <H2>Flexible Orders</H2>
         </Header>
         <Content>
           <br />

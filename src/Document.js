@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Table } from 'elemental'
+import { itemIsDue } from './isDueSpecification'
 
-export default (props) => {
-    props.items.sort((a, b) => a.position - b.position)
+import LineItem from './LineItem'
+import { SHOW_DUE_ITEMS_ONLY } from './actions'
+
+export default function Document(props) {
+    const items = props.document.items
+    items.sort((a, b) => a.position - b.position)
+    if (props.filter.includes(SHOW_DUE_ITEMS_ONLY))
+        items.filter(item => itemIsDue(item, props.childrenByParent))
+
 
     return (
         <div>
-            {props.id}
+            {props.document.id}
             <Table>
                 <colgroup>
                     <col width="20" />
@@ -23,26 +31,17 @@ export default (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.items.map(item => {
-                        let product = {
-                            name: '',
-                            productNumber: ''
-                        }
-                        if (item.product){
-                            product = item.product
-                        }
-
-                        return (
-                            <tr key={item.id}>
-                                <td><input type="checkbox" /></td>
-                                <td>{item.position}</td>
-                                <td>{product.productNumber} - {product.name}</td>
-                                <td>{item.quantity}</td>
-                            </tr>
-                        )
-                    })}
+                    {props.document.items.map(item =>
+                        <LineItem {...item}
+                            key={item.id}
+                            due={itemIsDue(item, props.childrenByParent)} />)}
                 </tbody>
             </Table>
         </div>
     )
-} 
+}
+
+Document.propTypes = {
+    childrenByParent: PropTypes.object,
+    document: PropTypes.object
+}
