@@ -1,17 +1,17 @@
 import { documentIsDue, dueQty } from '../isDueSpecification';
 
 import initialState from '../initialState';
-import indexOnChildrenByParent from '../childrenByParent'
+import createClosureRetrieveChildrenOfItem from '../childrenByParent'
 
-const childrenByParent = indexOnChildrenByParent(initialState.documents);
+const retrieveChildrenByParent = createClosureRetrieveChildrenOfItem(initialState.documents);
 
 it('B11 should not be due', () => {
-  const due = documentIsDue(initialState.documents['B11'], childrenByParent)
-  expect(due).toBeFalsy()
+  const due = documentIsDue(initialState.documents['B11'], retrieveChildrenByParent)
+  expect(due).toBeFalsy() 
 });
 
 it('B21 should be due', () => {
-  const due = documentIsDue(initialState.documents['B21'], childrenByParent)
+  const due = documentIsDue(initialState.documents['B21'], retrieveChildrenByParent)
   expect(due).toBeTruthy()
 });
 
@@ -33,6 +33,5 @@ it(`Item of AB11 should be partly due:
  #33 5   -> L13#51 5`
   , () => {
     const item32 = initialState.documents['AB11'].items.filter(item => item.id === 32)[0]
-    const result = dueQty(item32, childrenByParent)
-    expect(result).toBe(5)
+    expect(dueQty(item32, retrieveChildrenByParent)).toBe(5)
   });
