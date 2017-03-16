@@ -1,21 +1,21 @@
-export const dueQty = (item, childrenByParent) => {
-    if (childrenByParent[item.id] === undefined) {
+export const dueQty = (item, retrieveChildrenOfItem) => {
+    if (retrieveChildrenOfItem(item.id).length === 0) {
         return item.quantity;
     } else {
         const summedQtyOfChildren =
-            childrenByParent[item.id].reduce((acc, child) => {
+            retrieveChildrenOfItem(item.id).reduce((acc, child) => {
                 return acc + child.quantity
             }, 0);
         return (item.quantity - summedQtyOfChildren)
     }
 }
 
-export const itemIsDue = (item, childrenByParent) => {
-    return 0 < dueQty(item, childrenByParent); 
+export const itemIsDue = (item, retrieveChildrenOfItem) => {
+    return 0 < dueQty(item, retrieveChildrenOfItem); 
 }
 
-export const documentIsDue = (document, childrenByParent) => {
-    const dues = document.items.map(item => itemIsDue(item, childrenByParent))
+export const documentIsDue = (document, retrieveChildrenOfItem) => {
+    const dues = document.items.map(item => itemIsDue(item, retrieveChildrenOfItem))
 
     return dues.reduce((acc = false, bool) => {
         if (bool)

@@ -4,7 +4,7 @@ import { Card } from 'elemental'
 import styled from 'styled-components'
 import { Pill } from 'elemental'
 
-import indexOnChildrenByParent from './childrenByParent'
+import createClosureRetrieveChildrenOfItem from './childrenByParent'
 import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
 import { withOverlay } from './Components/withOverlay'
@@ -40,15 +40,15 @@ export class DocumentList extends Component {
     }
 
     render = () => {
-        const childrenByParent = indexOnChildrenByParent(this.props.documents);
+        const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(this.props.documents)
 
         const docs = Object.keys(this.props.documents).map(key => {
             const doc = this.props.documents[key];
-            const due = documentIsDue(doc, childrenByParent)
+            const due = documentIsDue(doc, retrieveChildrenOfItem)
 
             const DocumentInCard =
                 <Card key={key}>
-                    <Document childrenByParent={childrenByParent} document={doc} filter={this.props.filter} />
+                    <Document childrenByParent={retrieveChildrenOfItem} document={doc} filter={this.props.filter} />
                 </Card>
 
             if (this.props.filter.includes(SHOW_DUE_ITEMS_ONLY)) {

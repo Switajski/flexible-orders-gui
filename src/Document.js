@@ -44,7 +44,7 @@ export default function Document(props) {
 }
 
 Document.propTypes = {
-    childrenByParent: PropTypes.object,
+    childrenByParent: PropTypes.func,
     document: PropTypes.object,
     filter: PropTypes.array
 }
