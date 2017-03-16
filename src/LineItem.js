@@ -11,7 +11,10 @@ export default function LineItem(props) {
 
     let QtyTd = () => (<td>{props.quantity}</td>)
     if (props.showDueItemsOnly) {
-        QtyTd = () => (<td>{(props.dueQty === props.quantity) ? '' : props.dueQty + '/'}{props.quantity}</td>)
+        QtyTd = () => (
+            <td>
+                {(props.dueQty === props.quantity || props.dueQty === 0) ? '' : props.dueQty + '/'}{props.quantity}
+            </td>)
     }
 
     const due = props.dueQty > 0;

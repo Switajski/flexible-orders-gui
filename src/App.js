@@ -15,13 +15,10 @@ const Logo = styled.img`
   animation: ${applogospin} infinite 20s linear;
   height: 80px;`
 
-const H2 = styled.h2`
-  color: white;`
-
 const Header = styled.div`
   background-color: #222;
   text-align: center;
-  height: 150px;
+  height: 120px;
   padding: 20px;
   color: white;`
 
