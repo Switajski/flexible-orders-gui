@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
+import { Alert } from 'elemental'
 
 import logo from './logo.svg'
 import DocumentList from './DocumentList'
@@ -8,8 +10,7 @@ const applogospin = keyframes`
  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }`
 
-const GlobalStyled = styled.div`
-  background-color: #DDD;`
+const GlobalStyled = styled.div``
 
 const Logo = styled.img`
   animation: ${applogospin} infinite 20s linear;
@@ -38,8 +39,10 @@ class App extends Component {
         <Header>
           <Logo src={logo} alt="logo" />
         </Header>
+        {this.props.errors.length > 0 &&
+          this.props.errors.map(msg => (<Alert type="danger"><strong>Error: {msg}</strong> </Alert>))
+        }
         <Content>
-          <br />
           <DocumentList />
         </Content>
       </GlobalStyled>
@@ -47,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(state => state)(App);

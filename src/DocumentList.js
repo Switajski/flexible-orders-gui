@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Card } from 'elemental'
 import styled from 'styled-components'
 import { Pill } from 'elemental'
+import request from 'request'
 
 import createClosureRetrieveChildrenOfItem from './childrenByParent'
 import Document from './Document'
@@ -11,7 +12,8 @@ import { withOverlay } from './Components/withOverlay'
 import {
     showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
     dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR,
-    DUE_MARK_DONE
+    DUE_MARK_DONE,
+    showError
 } from './actions'
 
 const H2AlignedInMiddle = styled.h2`
@@ -29,6 +31,17 @@ export class DocumentList extends Component {
                 return this.props.dispatch(dueItemsFilterClear)
             default: return false;
         }
+    }
+
+    componentWillMount = () => {
+        // some asynchronous experimenting:
+        //setTimeout(() => {alert('huch') }, 3000)
+        const r = request('http://localhost:8080/processed-orders/documents',
+            (error, response, body) => {
+                if (error) {
+                    this.props.dispatch(showError('Could not fetch documents from server: ' + error.message))
+                }
+            })
     }
 
     clearFilterDueItems = (evt, button) => {
@@ -67,9 +80,10 @@ export class DocumentList extends Component {
         })
 
         return (
-            <div><Pill label='due items only' type="primary"
-                onClear={this.clearFilterDueItems}
-                onClick={this.filterDueItems} />
+            <div>
+                <Pill label='due items only' type="primary"
+                    onClear={this.clearFilterDueItems}
+                    onClick={this.filterDueItems} />
 
                 <div>
                     {docs}
