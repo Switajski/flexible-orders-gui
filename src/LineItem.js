@@ -1,5 +1,4 @@
-import React from 'react'
-import { SHOW_DUE_ITEMS_ONLY } from './actions'
+import React, { PropTypes } from 'react'
 
 export default function LineItem(props) {
     let product = {
@@ -10,13 +9,23 @@ export default function LineItem(props) {
         product = props.product
     }
 
+    let QtyTd = () => (<td>{props.quantity}</td>)
+    if (props.showDueItemsOnly) {
+        QtyTd = () => (<td>{(props.dueQty === props.quantity) ? '' : props.dueQty + '/'}{props.quantity}</td>)
+    }
+
+    const due = props.dueQty > 0;
     return (
         <tr key={props.id}>
-            {props.due ? <td><input type="checkbox" /></td> : <td></td>}
+            {due ? <td><input type="checkbox" /></td> : <td></td>}
             <td>{props.position}</td>
             <td>{product.productNumber} - {product.name}</td>
-            <td>{props.quantity}</td>
+            <QtyTd />
         </tr>
     )
-    
+
+}
+
+LineItem.propTypes = {
+    dueQty: PropTypes.number,
 }

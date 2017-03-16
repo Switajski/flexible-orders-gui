@@ -1,14 +1,19 @@
 /**
- * B11 
- *  10 x Amy Fleece -> AB11 10 ->
- *  15 x Miladka athra stars lime -> AB11 15
- *  30 x Paul anthra dots -> AB11 30
+ * B11 -> AB11
+ *  14# 10 x Amy Fleece -> 32# AB11 10 
+ *  15# 15 x Miladka athra stars lime -> 34# AB11 15
+ *  16# 30 x Paul anthra dots -> 31# AB11 30
  * 
- * R11:
- * Pos. 1: 48#ShippingItem 3 -> 59#InvoiceItem 3 p:48
- * Pos. 2: 45#ShippingItem 2 -> 60#InvoiceItem 2 p:45
- * Pos. 3: 49#ShippingItem 3 -> 61#InvoiceItem 3 p:49
- * Pos. 4: 46#ShippingItem 2 -> 62#InvoiceItem 2 p:46
+ * AB11 -> L11
+ *  #32 10  -> L11#45 2
+ *          -> L12#49 3
+ *  #34 15  -> L11#46 2
+ *          -> L12#48 3
+ *  #31 30  -> L14#54 5
+ *          -> L15#57 15
+ *  #30 12  -> L13#52 1
+ *  #33 5   -> L13#51 5
+ * 
  */
 
 export default [

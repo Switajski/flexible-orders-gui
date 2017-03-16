@@ -1,14 +1,6 @@
 
 export const itemIsDue = (item, childrenByParent) => {
-    if (childrenByParent[item.id] === undefined) {
-        return true;
-    } else {
-        const summedQtyOfChildren =
-            childrenByParent[item.id].reduce((acc, child) => {
-                return acc + child.quantity
-            }, 0);
-        return (summedQtyOfChildren < item.quantity)
-    }
+    return 0 < dueQty(item, childrenByParent); 
 }
 
 export const documentIsDue = (document, childrenByParent) => {
@@ -19,4 +11,16 @@ export const documentIsDue = (document, childrenByParent) => {
             return acc = true;
         return acc;
     })
+}
+
+export const dueQty = (item, childrenByParent) => {
+    if (childrenByParent[item.id] === undefined) {
+        return item.quantity;
+    } else {
+        const summedQtyOfChildren =
+            childrenByParent[item.id].reduce((acc, child) => {
+                return acc + child.quantity
+            }, 0);
+        return (item.quantity - summedQtyOfChildren)
+    }
 }

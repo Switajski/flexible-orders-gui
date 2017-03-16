@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react'
 import { Table } from 'elemental'
-import { itemIsDue } from './isDueSpecification'
+import { itemIsDue, dueQty } from './isDueSpecification'
 
 import LineItem from './LineItem'
 import { SHOW_DUE_ITEMS_ONLY } from './actions'
 
 export default function Document(props) {
     const items = props.document.items
+    const showDueItemsOnly = props.filter.includes(SHOW_DUE_ITEMS_ONLY)
+    
     items.sort((a, b) => a.position - b.position)
-    if (props.filter.includes(SHOW_DUE_ITEMS_ONLY))
+    if (showDueItemsOnly)
         items.filter(item => itemIsDue(item, props.childrenByParent))
-
 
     return (
         <div>
@@ -34,7 +35,8 @@ export default function Document(props) {
                     {props.document.items.map(item =>
                         <LineItem {...item}
                             key={item.id}
-                            due={itemIsDue(item, props.childrenByParent)} />)}
+                            dueQty={dueQty(item, props.childrenByParent)}
+                            showDueItemsOnly={showDueItemsOnly} />)}
                 </tbody>
             </Table>
         </div>
@@ -43,5 +45,6 @@ export default function Document(props) {
 
 Document.propTypes = {
     childrenByParent: PropTypes.object,
-    document: PropTypes.object
+    document: PropTypes.object,
+    filter: PropTypes.array
 }
