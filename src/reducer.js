@@ -1,8 +1,14 @@
-import { 
-    SHOW_DUE_ITEMS_ONLY, DUE_ITEMS_FILTER_CLEAR, DUE_MARK_DONE, SHOW_ERROR, LOAD_DOCUMENTS } from './actions'
+import {
+    SHOW_DUE_ITEMS_ONLY,
+    DUE_ITEMS_FILTER_CLEAR,
+    DUE_MARK_DONE,
+    SHOW_ERROR,
+    LOAD_DOCUMENTS,
+    REQUESTING_DOCS
+} from './actions'
 
-const initialState = { 
-    documents: {}, 
+const initialState = {
+    documents: {},
     filter: [SHOW_DUE_ITEMS_ONLY],
     errors: []
 }
@@ -21,8 +27,12 @@ export default (state = initialState, action) => {
         case SHOW_ERROR:
             const newErrors = [...state.errors, action.msg]
             return { ...state, errors: newErrors }
+        case REQUESTING_DOCS:
+            return { ...state, REQUESTING_DOCS: true }
         case LOAD_DOCUMENTS:
-            return { ...state, documents: action.documents }
+            return { ...state, 
+                documents: action.documents, 
+                REQUESTING_DOCS: false }
         default:
             return state;
     }

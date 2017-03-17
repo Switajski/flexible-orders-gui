@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card } from 'elemental'
 import styled from 'styled-components'
-import { Pill } from 'elemental'
+import { Pill, Spinner } from 'elemental'
 
 import createClosureRetrieveChildrenOfItem from './childrenByParent'
 import Document from './Document'
@@ -13,12 +13,16 @@ import {
     dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR,
     DUE_MARK_DONE,
     showError,
-    loadDocuments
+    loadDocuments,
+    requestDocs, REQUESTING_DOCS
 } from './actions'
 
 const H2AlignedInMiddle = styled.h2`
     text-align:center;
     vertical-align: middle;`
+
+const Centered = styled.div`
+    text-align:center`
 
 
 export class DocumentList extends Component {
@@ -34,17 +38,12 @@ export class DocumentList extends Component {
     }
 
     componentDidMount = () => {
-        // block thread - from http://stackoverflow.com/questions/14863022/settimeout-behaviour-with-blocking-code
-        //const start = Date.now()
-        //while (Date.now() < start + 5000) {}
 
-        const myInit = {
-            method: 'GET',
-            cache: 'default'
-        };
-
-        fetch('/documents', myInit)
+        this.props.dispatch(requestDocs)
+        fetch('/documents')
             .then(response => {
+                const start = Date.now()
+                while (Date.now() < start + 3000) { }
                 if (!response.ok) {
                     throw Error('Network response was not ok');
                 } else {
@@ -101,9 +100,10 @@ export class DocumentList extends Component {
                     onClear={this.clearFilterDueItems}
                     onClick={this.filterDueItems} />
 
-                <div>
+                <Centered>
                     {docs}
-                </div >
+                    {this.props.REQUESTING_DOCS && <Spinner size="lg" />}
+                </Centered>
             </div>)
     }
 }
