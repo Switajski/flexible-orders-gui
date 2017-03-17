@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Card } from 'elemental'
 import styled from 'styled-components'
 import { Pill } from 'elemental'
-import request from 'request'
 
 import createClosureRetrieveChildrenOfItem from './childrenByParent'
 import Document from './Document'
@@ -13,7 +12,8 @@ import {
     showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
     dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR,
     DUE_MARK_DONE,
-    showError
+    showError,
+    loadDocuments
 } from './actions'
 
 const H2AlignedInMiddle = styled.h2`
@@ -33,14 +33,30 @@ export class DocumentList extends Component {
         }
     }
 
-    componentWillMount = () => {
-        // some asynchronous experimenting:
-        //setTimeout(() => {alert('huch') }, 3000)
-        const r = request('http://localhost:8080/processed-orders/documents',
-            (error, response, body) => {
-                if (error) {
-                    this.props.dispatch(showError('Could not fetch documents from server: ' + error.message))
+    componentDidMount = () => {
+        // block thread - from http://stackoverflow.com/questions/14863022/settimeout-behaviour-with-blocking-code
+        //const start = Date.now()
+        //while (Date.now() < start + 5000) {}
+
+        const myInit = {
+            method: 'GET',
+            cache: 'default'
+        };
+
+        fetch('/documents', myInit)
+            .then(response => {
+                if (!response.ok) {
+                    throw Error('Network response was not ok');
+                } else {
+                    return response.json()
                 }
+            })
+            .then(response => {
+                this.props.dispatch(loadDocuments(response))
+            })
+            .catch(err => {
+                this.props.dispatch(
+                    showError('Could not fetch documents from server: ' + err.message))
             })
     }
 

@@ -1,4 +1,4 @@
-import documents from './documents'
+// import documents from './documents'
 import { SHOW_DUE_ITEMS_ONLY } from './actions'
 
 const indexedDocs = {};

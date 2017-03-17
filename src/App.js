@@ -6,8 +6,6 @@ import { Alert } from 'elemental'
 import logo from './logo.svg'
 import DocumentList from './DocumentList'
 
-const WrappedAlert = styled(Alert)``
-
 const applogospin = keyframes`
  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }`
@@ -42,7 +40,7 @@ class App extends Component {
         <Content>
           {this.props.errors.length > 0 &&
             this.props.errors.map(msg => (
-              <Alert type="danger"><strong>Error: </strong>{msg}</Alert>
+              <Alert type="danger" key={msg}><strong>Error: </strong>{msg}</Alert>
             ))
           }
           <DocumentList />
