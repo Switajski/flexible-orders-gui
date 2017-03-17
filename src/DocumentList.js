@@ -7,39 +7,32 @@ import { Pill, Spinner } from 'elemental'
 import createClosureRetrieveChildrenOfItem from './childrenByParent'
 import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
-import { withOverlay } from './Components/withOverlay'
 import {
-    showDueItemsOnly, SHOW_DUE_ITEMS_ONLY,
-    dueItemsFilterClear, DUE_ITEMS_FILTER_CLEAR,
-    DUE_MARK_DONE,
+    showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
+    clearDueItemsFilter, CLEARING_DUE_FILTER,
     showError,
-    loadDocuments,
-    requestDocs, REQUESTING_DOCS
+    fetchDocs,
+    fetchingDocs
 } from './actions'
-
-const H2AlignedInMiddle = styled.h2`
-    text-align:center;
-    vertical-align: middle;`
 
 const Centered = styled.div`
     text-align:center`
-
 
 export class DocumentList extends Component {
 
     onDueDropdownSelect = (event) => {
         switch (event) {
-            case SHOW_DUE_ITEMS_ONLY:
+            case SHOWING_DUE_ITEMS_ONLY:
                 return this.props.dispatch(showDueItemsOnly)
-            case DUE_ITEMS_FILTER_CLEAR:
-                return this.props.dispatch(dueItemsFilterClear)
+            case CLEARING_DUE_FILTER:
+                return this.props.dispatch(clearDueItemsFilter)
             default: return false;
         }
     }
 
     componentDidMount = () => {
 
-        this.props.dispatch(requestDocs)
+        this.props.dispatch(fetchingDocs)
         fetch('/documents')
             .then(response => {
                 const start = Date.now()
@@ -51,7 +44,7 @@ export class DocumentList extends Component {
                 }
             })
             .then(response => {
-                this.props.dispatch(loadDocuments(response))
+                this.props.dispatch(fetchDocs(response))
             })
             .catch(err => {
                 this.props.dispatch(
@@ -60,7 +53,7 @@ export class DocumentList extends Component {
     }
 
     clearFilterDueItems = (evt, button) => {
-        this.props.dispatch(dueItemsFilterClear);
+        this.props.dispatch(clearDueItemsFilter);
     }
 
     filterDueItems = (evt, button) => {
@@ -79,7 +72,7 @@ export class DocumentList extends Component {
                     <Document childrenByParent={retrieveChildrenOfItem} document={doc} filter={this.props.filter} />
                 </Card>
 
-            if (this.props.filter.includes(SHOW_DUE_ITEMS_ONLY)) {
+            if (this.props.filter.includes(SHOWING_DUE_ITEMS_ONLY)) {
                 if (due) {
                     return DocumentInCard
                 } else {
@@ -87,10 +80,6 @@ export class DocumentList extends Component {
                 }
             }
 
-            if (!due && this.props.filter.includes(DUE_MARK_DONE)) {
-                const ComponentWithOverlay = withOverlay(Document, <H2AlignedInMiddle>Done</H2AlignedInMiddle>);
-                return (props) => (<ComponentWithOverlay {...props} key={key} />)
-            }
             return DocumentInCard
         })
 
@@ -102,7 +91,7 @@ export class DocumentList extends Component {
 
                 <Centered>
                     {docs}
-                    {this.props.REQUESTING_DOCS && <Spinner size="lg" />}
+                    {this.props.FETCHING_DOCS && <Spinner size="lg" />}
                 </Centered>
             </div>)
     }

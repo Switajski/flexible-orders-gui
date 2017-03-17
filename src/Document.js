@@ -3,11 +3,11 @@ import { Table } from 'elemental'
 import { itemIsDue, dueQty } from './isDueSpecification'
 
 import LineItem from './LineItem'
-import { SHOW_DUE_ITEMS_ONLY } from './actions'
+import { SHOWING_DUE_ITEMS_ONLY } from './actions'
 
 export default function Document(props) {
     const items = props.document.items
-    const showDueItemsOnly = props.filter.includes(SHOW_DUE_ITEMS_ONLY)
+    const showDueItemsOnly = props.filter.includes(SHOWING_DUE_ITEMS_ONLY)
     
     items.sort((a, b) => a.position - b.position)
     if (showDueItemsOnly)
