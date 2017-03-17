@@ -3,14 +3,14 @@ import React from 'react'
 
 import { DocumentList } from '../DocumentList'
 import { Pill, Card } from 'elemental'
-import initialState from '../initialState'
+import documents from './testDocuments'
 import { showDueItemsOnly } from '../actions'
 
 describe('DocumentList', () => {
         const dispatchSpy = jest.fn()
         const list = shallow(
             <DocumentList
-                documents={initialState.documents}
+                documents={documents}
                 dispatch={dispatchSpy}
                 filter={[]} />)
 

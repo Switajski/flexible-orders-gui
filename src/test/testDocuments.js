@@ -16,7 +16,7 @@
  * 
  */
 
-export default [
+const documents = [
     {
         "id": "B11",
         "created": "12/02/2017",
@@ -1463,3 +1463,12 @@ export default [
         "vatRate": 0.19
     }
 ]
+export default documents
+
+export function createClosureRetieveDocById(){
+    const indexedDocs = {};
+    documents.forEach((doc) => {
+        indexedDocs[doc['id']] = doc
+    })
+    return (id) => indexedDocs[id]
+}

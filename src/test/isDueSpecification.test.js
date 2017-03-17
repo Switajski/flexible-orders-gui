@@ -1,17 +1,20 @@
 import { documentIsDue, dueQty } from '../isDueSpecification';
-
-import initialState from '../initialState';
+ 
+import documents, { createClosureRetieveDocById } from './testDocuments';
 import createClosureRetrieveChildrenOfItem from '../childrenByParent'
 
-const retrieveChildrenByParent = createClosureRetrieveChildrenOfItem(initialState.documents);
+const retrieveDocById = createClosureRetieveDocById();
+const retrieveChildrenByParent = createClosureRetrieveChildrenOfItem(documents);
 
 it('B11 should not be due', () => {
-  const due = documentIsDue(initialState.documents['B11'], retrieveChildrenByParent)
-  expect(due).toBeFalsy() 
+  const due = documentIsDue(retrieveDocById
+('B11'), retrieveChildrenByParent)
+  expect(due).toBeFalsy()
 });
 
 it('B21 should be due', () => {
-  const due = documentIsDue(initialState.documents['B21'], retrieveChildrenByParent)
+  const due = documentIsDue(retrieveDocById
+('B21'), retrieveChildrenByParent)
   expect(due).toBeTruthy()
 });
 
@@ -32,6 +35,7 @@ it(`Item of AB11 should be partly due:
  #30 12  -> L13#52 1
  #33 5   -> L13#51 5`
   , () => {
-    const item32 = initialState.documents['AB11'].items.filter(item => item.id === 32)[0]
+    const item32 = retrieveDocById
+  ('AB11').items.filter(item => item.id === 32)[0]
     expect(dueQty(item32, retrieveChildrenByParent)).toBe(5)
   });

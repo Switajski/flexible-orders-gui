@@ -1,6 +1,5 @@
 import reducer from '../reducer';
 import { showDueItemsOnly, SHOW_DUE_ITEMS_ONLY } from '../actions'
-import { initialState } from '../initialState'
 
 describe('reducer SHOW_DUE_ITEMS_ONLY', () => {
     it('filter state should be set', () => {

@@ -1,6 +1,11 @@
 import { 
     SHOW_DUE_ITEMS_ONLY, DUE_ITEMS_FILTER_CLEAR, DUE_MARK_DONE, SHOW_ERROR, LOAD_DOCUMENTS } from './actions'
-import initialState from './initialState'
+
+const initialState = { 
+    documents: {}, 
+    filter: [SHOW_DUE_ITEMS_ONLY],
+    errors: []
+}
 
 export default (state = initialState, action) => {
     switch (action.type) {
