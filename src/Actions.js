@@ -1,7 +1,7 @@
 export const SHOWING_DUE_ITEMS_ONLY = 'SHOWING_DUE_ITEMS_ONLY';
 export const CLEARING_DUE_FILTER = 'CLEARING_DUE_FILTER'
 export const SHOWING_ERROR = 'SHOWING_ERROR'
-export const FETCHED_DOCS = 'FETCHED_DOCS'
+export const FETCH_DOCS_SUCCESS = 'FETCH_DOCS_SUCCESS'
 export const FETCHING_DOCS = 'FETCHING_DOCS'
 
 export const showDueItemsOnly = {
@@ -19,9 +19,9 @@ export const showError = msg => {
     }
 }
 
-export const fetchDocs = documents => {
+export const fetchDocsSuccess = documents => {
     return {
-        type: FETCHED_DOCS,
+        type: FETCH_DOCS_SUCCESS,
         documents: documents
     }
 }

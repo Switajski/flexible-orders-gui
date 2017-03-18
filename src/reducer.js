@@ -2,7 +2,7 @@ import {
     SHOWING_DUE_ITEMS_ONLY,
     CLEARING_DUE_FILTER,
     SHOWING_ERROR,
-    FETCHED_DOCS,
+    FETCH_DOCS_SUCCESS,
     FETCHING_DOCS
 } from './actions'
 
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
             return { ...state, errors: newErrors }
         case FETCHING_DOCS:
             return { ...state, FETCHING_DOCS: true }
-        case FETCHED_DOCS:
+        case FETCH_DOCS_SUCCESS:
             return { ...state, 
                 documents: action.documents, 
                 FETCHING_DOCS: false }

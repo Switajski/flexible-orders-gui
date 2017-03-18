@@ -11,7 +11,7 @@ import {
     showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
     clearDueItemsFilter, CLEARING_DUE_FILTER,
     showError,
-    fetchDocs,
+    fetchDocsSuccess,
     fetchingDocs
 } from './actions'
 
@@ -44,7 +44,7 @@ export class DocumentList extends Component {
                 }
             })
             .then(response => {
-                this.props.dispatch(fetchDocs(response))
+                this.props.dispatch(fetchDocsSuccess(response))
             })
             .catch(err => {
                 this.props.dispatch(
