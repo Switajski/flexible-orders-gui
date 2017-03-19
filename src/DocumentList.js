@@ -63,6 +63,12 @@ export class DocumentList extends Component {
     render = () => {
         const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(this.props.documents)
 
+        let showDueItemsOnly = false
+        if (this.props.filter) {
+            if (this.props.filter.includes(SHOWING_DUE_ITEMS_ONLY))
+                showDueItemsOnly = true
+        }
+
         const docs = Object.keys(this.props.documents).map(key => {
             const doc = this.props.documents[key];
             const due = documentIsDue(doc, retrieveChildrenOfItem)
@@ -73,10 +79,10 @@ export class DocumentList extends Component {
                         childrenByParent={retrieveChildrenOfItem}
                         document={doc}
                         filter={this.props.filter}
-                        shoeDueItemsOnly={this.props.filter.includes(SHOWING_DUE_ITEMS_ONLY)} />
+                        showDueItemsOnly={showDueItemsOnly} />
                 </Card>
 
-            if (this.props.filter.includes(SHOWING_DUE_ITEMS_ONLY)) {
+            if (showDueItemsOnly) {
                 if (due) {
                     return DocumentInCard
                 } else {
