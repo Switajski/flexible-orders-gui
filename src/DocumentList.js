@@ -69,7 +69,11 @@ export class DocumentList extends Component {
 
             const DocumentInCard =
                 <Card key={key}>
-                    <Document childrenByParent={retrieveChildrenOfItem} document={doc} filter={this.props.filter} />
+                    <Document
+                        childrenByParent={retrieveChildrenOfItem}
+                        document={doc}
+                        filter={this.props.filter}
+                        shoeDueItemsOnly={this.props.filter.includes(SHOWING_DUE_ITEMS_ONLY)} />
                 </Card>
 
             if (this.props.filter.includes(SHOWING_DUE_ITEMS_ONLY)) {
