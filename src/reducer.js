@@ -9,6 +9,7 @@ import {
 const initialState = {
     documents: {},
     filter: [SHOWING_DUE_ITEMS_ONLY],
+    
     errors: []
 }
 
