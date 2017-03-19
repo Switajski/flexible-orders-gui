@@ -3,13 +3,14 @@ import {
     CLEARING_DUE_FILTER,
     SHOWING_ERROR,
     FETCH_DOCS_SUCCESS,
-    FETCHING_DOCS
+    FETCHING_DOCS,
+    FETCH_DOCS_FAILED
 } from './actions'
 
 const initialState = {
     documents: {},
     filter: [SHOWING_DUE_ITEMS_ONLY],
-    
+
     errors: []
 }
 
@@ -28,9 +29,18 @@ export default (state = initialState, action) => {
         case FETCHING_DOCS:
             return { ...state, FETCHING_DOCS: true }
         case FETCH_DOCS_SUCCESS:
-            return { ...state, 
-                documents: action.documents, 
-                FETCHING_DOCS: false }
+            return {
+                ...state,
+                documents: action.documents,
+                FETCHING_DOCS: false
+            }
+        case FETCH_DOCS_FAILED:
+            const errs = [...state.errors, action.message]
+            return {
+                ...state,
+                errors: errs,
+                FETCHING_DOCS: false
+            }
         default:
             return state;
     }

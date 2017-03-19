@@ -12,7 +12,8 @@ import {
     clearDueItemsFilter, CLEARING_DUE_FILTER,
     showError,
     fetchDocsSuccess,
-    fetchingDocs
+    fetchingDocs,
+    fetchDocsFailed
 } from './actions'
 
 const Centered = styled.div`
@@ -48,7 +49,8 @@ export class DocumentList extends Component {
             })
             .catch(err => {
                 this.props.dispatch(
-                    showError('Could not fetch documents from server: ' + err.message))
+                    fetchDocsFailed('Could not fetch documents from server: ' + err.message)
+                )
             })
     }
 
@@ -61,37 +63,40 @@ export class DocumentList extends Component {
     }
 
     render = () => {
-        const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(this.props.documents)
-
         let showDueItemsOnly = false
         if (this.props.filter) {
             if (this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY))
                 showDueItemsOnly = true
         }
 
-        const docs = Object.keys(this.props.documents).map(key => {
-            const doc = this.props.documents[key];
-            const due = documentIsDue(doc, retrieveChildrenOfItem)
+        // TODO: code below could be obsolete by a normalized data structure in state
+        let docs = undefined;
+        if (this.props.documents) {
+            const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(this.props.documents);
+            docs = Object.keys(this.props.documents).map(key => {
+                const doc = this.props.documents[key];
+                const due = documentIsDue(doc, retrieveChildrenOfItem)
 
-            const DocumentInCard =
-                <Card key={key}>
-                    <Document
-                        childrenByParent={retrieveChildrenOfItem}
-                        document={doc}
-                        filter={this.props.filter}
-                        showDueItemsOnly={showDueItemsOnly} />
-                </Card>
+                const DocumentInCard =
+                    <Card key={key}>
+                        <Document
+                            childrenByParent={retrieveChildrenOfItem}
+                            document={doc}
+                            filter={this.props.filter}
+                            showDueItemsOnly={showDueItemsOnly} />
+                    </Card>
 
-            if (showDueItemsOnly) {
-                if (due) {
-                    return DocumentInCard
-                } else {
-                    return <div key={key} />
+                if (showDueItemsOnly) {
+                    if (due) {
+                        return DocumentInCard
+                    } else {
+                        return <div key={key} />
+                    }
                 }
-            }
 
-            return DocumentInCard
-        })
+                return DocumentInCard
+            })
+        }
 
         return (
             <div>
