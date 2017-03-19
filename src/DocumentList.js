@@ -65,7 +65,7 @@ export class DocumentList extends Component {
 
         let showDueItemsOnly = false
         if (this.props.filter) {
-            if (this.props.filter.find(SHOWING_DUE_ITEMS_ONLY, () => true))
+            if (this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY))
                 showDueItemsOnly = true
         }
 
