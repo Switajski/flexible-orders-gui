@@ -9,7 +9,6 @@ import {
 
 // TODO: only test data - remove after docs are fetched from server
 import { createNormalizedTestData } from './test/testDocuments'
-import { normalizeDocument } from './normalizer'
 
 const { documents, lineItems } = createNormalizedTestData()
 

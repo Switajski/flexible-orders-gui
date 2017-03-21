@@ -6,8 +6,8 @@ export function normalizeDocument(doc) {
         normalizedItems[item.id] = item;
     })
     // eleminate items, as they are stored separatly
-    const { ['items']: removedItems, ...remainingDoc } = doc
+    delete doc.items
 
-    return {document: remainingDoc, lineItems: normalizedItems}
+    return {document: doc, lineItems: normalizedItems}
 }
 

@@ -8,11 +8,7 @@ import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
 import {
     showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
-    clearDueItemsFilter, CLEARING_DUE_FILTER,
-    showError,
-    fetchDocsSuccess,
-    fetchingDocs,
-    fetchDocsFailed
+    clearDueItemsFilter, CLEARING_DUE_FILTER
 } from './actions'
 import { createClosureRetrieveChildrenOfItem } from './selectors'
 
