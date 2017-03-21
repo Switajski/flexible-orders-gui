@@ -1,15 +1,15 @@
+import { createSelector } from 'reselect'
+
 export function createClosureRetrieveChildrenOfItem(allLineItems) {
-    return itemId => 
+    return itemId =>
         Object.keys(allLineItems)
             .map(key => allLineItems[key])
             .filter((item) => item.predecessor === itemId)
-    
 }
 
 export function createClosureRetrieveLineItemsByDocId(allLineItems) {
-    return docId => 
+    return docId =>
         Object.keys(allLineItems)
             .map(key => allLineItems[key])
             .filter(li => li.docId === docId)
-    
 }

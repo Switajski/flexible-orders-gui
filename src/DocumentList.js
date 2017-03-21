@@ -10,7 +10,10 @@ import {
     showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
     clearDueItemsFilter, CLEARING_DUE_FILTER
 } from './actions'
-import { createClosureRetrieveChildrenOfItem } from './selectors'
+import {
+    createClosureRetrieveChildrenOfItem,
+    createClosureRetrieveLineItemsByDocId
+} from './selectors'
 
 const Centered = styled.div`
     text-align:center`
@@ -41,12 +44,11 @@ export class DocumentList extends Component {
 
         const lis = this.props.lineItems;
         const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(lis);
+        const retrieveLineItemsByDocId = createClosureRetrieveLineItemsByDocId(lis);
 
         docs = Object.keys(this.props.documents).map(key => {
-            const doc = this.props.documents[key];
-            const lineItems = Object.keys(lis)
-                .map(key => lis[key])
-                .filter(li => li.docId === doc.id)
+            const doc = this.props.documents[key]
+            const lineItems = retrieveLineItemsByDocId(key)
             const due = documentIsDue(
                 lineItems,
                 retrieveChildrenOfItem)

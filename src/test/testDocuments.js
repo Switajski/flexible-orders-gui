@@ -15,7 +15,7 @@
  *  #33 5   -> L13#51 5
  * 
  */
-import {normalizeDocument} from '../normalizer'
+import { normalizeDocument } from '../normalizer'
 
 const rawDocuments = [
     {
@@ -153,27 +153,6 @@ const rawDocuments = [
         "originSystem": "FLEXIBLE_ORDERS",
         "items": [
             {
-                "position": 2,
-                "created": "12/02/2017",
-                "type": "OrderItem",
-                "version": 0,
-                "negotiatedPriceNet": {
-                    "value": 56.99,
-                    "currency": "EUR"
-                },
-                "product": {
-                    "name": "Jurek destroyer",
-                    "productType": "PRODUCT",
-                    "productNumber": "56026"
-                },
-                "packageNumber": null,
-                "trackingNumber": null,
-                "additionalInfo": null,
-                "shippingCosts": false,
-                "quantity": 5,
-                "id": 19
-            },
-            {
                 "position": 1,
                 "created": "12/02/2017",
                 "type": "OrderItem",
@@ -193,6 +172,27 @@ const rawDocuments = [
                 "shippingCosts": false,
                 "quantity": 12,
                 "id": 18
+            },
+            {
+                "position": 2,
+                "created": "12/02/2017",
+                "type": "OrderItem",
+                "version": 0,
+                "negotiatedPriceNet": {
+                    "value": 56.99,
+                    "currency": "EUR"
+                },
+                "product": {
+                    "name": "Jurek destroyer",
+                    "productType": "PRODUCT",
+                    "productNumber": "56026"
+                },
+                "packageNumber": null,
+                "trackingNumber": null,
+                "additionalInfo": null,
+                "shippingCosts": false,
+                "quantity": 5,
+                "id": 19
             }
         ],
         "vatRate": 0.19
@@ -253,27 +253,6 @@ const rawDocuments = [
                 "id": 21
             },
             {
-                "position": 1,
-                "created": "12/02/2017",
-                "type": "OrderItem",
-                "version": 0,
-                "negotiatedPriceNet": {
-                    "value": 43.99,
-                    "currency": "EUR"
-                },
-                "product": {
-                    "name": "Paul anthra dots",
-                    "productType": "PRODUCT",
-                    "productNumber": "43092"
-                },
-                "packageNumber": null,
-                "trackingNumber": null,
-                "additionalInfo": null,
-                "shippingCosts": false,
-                "quantity": 4,
-                "id": 23
-            },
-            {
                 "position": 3,
                 "created": "12/02/2017",
                 "type": "OrderItem",
@@ -314,6 +293,27 @@ const rawDocuments = [
                 "shippingCosts": false,
                 "quantity": 27,
                 "id": 24
+            },
+            {
+                "position": 1,
+                "created": "12/02/2017",
+                "type": "OrderItem",
+                "version": 0,
+                "negotiatedPriceNet": {
+                    "value": 43.99,
+                    "currency": "EUR"
+                },
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
+                "packageNumber": null,
+                "trackingNumber": null,
+                "additionalInfo": null,
+                "shippingCosts": false,
+                "quantity": 4,
+                "id": 23
             }
         ],
         "vatRate": 0.19
@@ -352,6 +352,27 @@ const rawDocuments = [
         "customerEmail": "massa.Suspendisse@consequat.edu",
         "originSystem": "FLEXIBLE_ORDERS",
         "items": [
+            {
+                "position": 2,
+                "created": "12/02/2017",
+                "type": "OrderItem",
+                "version": 0,
+                "negotiatedPriceNet": {
+                    "value": 43.99,
+                    "currency": "EUR"
+                },
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
+                "packageNumber": null,
+                "trackingNumber": null,
+                "additionalInfo": null,
+                "shippingCosts": false,
+                "quantity": 8,
+                "id": 27
+            },
             {
                 "position": 1,
                 "created": "12/02/2017",
@@ -393,27 +414,6 @@ const rawDocuments = [
                 "shippingCosts": false,
                 "quantity": 3,
                 "id": 28
-            },
-            {
-                "position": 2,
-                "created": "12/02/2017",
-                "type": "OrderItem",
-                "version": 0,
-                "negotiatedPriceNet": {
-                    "value": 43.99,
-                    "currency": "EUR"
-                },
-                "product": {
-                    "name": "Paul anthra dots",
-                    "productType": "PRODUCT",
-                    "productNumber": "43092"
-                },
-                "packageNumber": null,
-                "trackingNumber": null,
-                "additionalInfo": null,
-                "shippingCosts": false,
-                "quantity": 8,
-                "id": 27
             }
         ],
         "vatRate": 0.19
@@ -599,42 +599,6 @@ const rawDocuments = [
         "vatRate": 0.19
     },
     {
-        "id": "ABGEBROCHEN-AB22",
-        "created": "12/02/2017",
-        "type": "CancelReport",
-        "typeExtends": "Report",
-        "version": 0,
-        "items": [
-            {
-                "position": 2,
-                "created": "12/02/2017",
-                "type": "CancellationItem",
-                "version": 0,
-                "quantity": 6,
-                "predecessor": 67,
-                "rootLineItem": {
-                    "documentNo": "B22",
-                    "position": "2"
-                },
-                "id": 73
-            },
-            {
-                "position": 1,
-                "created": "12/02/2017",
-                "type": "CancellationItem",
-                "version": 0,
-                "quantity": 13,
-                "predecessor": 68,
-                "rootLineItem": {
-                    "documentNo": "B22",
-                    "position": "1"
-                },
-                "id": 74
-            }
-        ],
-        "vatRate": 0.19
-    },
-    {
         "id": "R11",
         "created": "12/02/2017",
         "type": "Invoice",
@@ -642,11 +606,34 @@ const rawDocuments = [
         "version": 0,
         "items": [
             {
+                "position": 1,
+                "created": "12/02/2017",
+                "type": "InvoiceItem",
+                "version": 0,
+                "quantity": 3,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
+                "predecessor": 48,
+                "rootLineItem": {
+                    "documentNo": "B11",
+                    "position": "2"
+                },
+                "id": 59
+            },
+            {
                 "position": 2,
                 "created": "12/02/2017",
                 "type": "InvoiceItem",
                 "version": 0,
                 "quantity": 2,
+                "product": {
+                    "name": "Amy Fleece",
+                    "productType": "PRODUCT",
+                    "productNumber": "75195"
+                },
                 "predecessor": 45,
                 "rootLineItem": {
                     "documentNo": "B11",
@@ -655,24 +642,16 @@ const rawDocuments = [
                 "id": 60
             },
             {
-                "position": 3,
-                "created": "12/02/2017",
-                "type": "InvoiceItem",
-                "version": 0,
-                "quantity": 3,
-                "predecessor": 49,
-                "rootLineItem": {
-                    "documentNo": "B11",
-                    "position": "1"
-                },
-                "id": 61
-            },
-            {
                 "position": 4,
                 "created": "12/02/2017",
                 "type": "InvoiceItem",
                 "version": 0,
                 "quantity": 2,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
                 "predecessor": 46,
                 "rootLineItem": {
                     "documentNo": "B11",
@@ -681,17 +660,22 @@ const rawDocuments = [
                 "id": 62
             },
             {
-                "position": 1,
+                "position": 3,
                 "created": "12/02/2017",
                 "type": "InvoiceItem",
                 "version": 0,
                 "quantity": 3,
-                "predecessor": 48,
+                "product": {
+                    "name": "Amy Fleece",
+                    "productType": "PRODUCT",
+                    "productNumber": "75195"
+                },
+                "predecessor": 49,
                 "rootLineItem": {
                     "documentNo": "B11",
-                    "position": "2"
+                    "position": "1"
                 },
-                "id": 59
+                "id": 61
             }
         ],
         "discountText": null,
@@ -714,6 +698,52 @@ const rawDocuments = [
         "vatRate": 0.19
     },
     {
+        "id": "ABGEBROCHEN-AB22",
+        "created": "12/02/2017",
+        "type": "CancelReport",
+        "typeExtends": "Report",
+        "version": 0,
+        "items": [
+            {
+                "position": 2,
+                "created": "12/02/2017",
+                "type": "CancellationItem",
+                "version": 0,
+                "quantity": 6,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
+                "predecessor": 67,
+                "rootLineItem": {
+                    "documentNo": "B22",
+                    "position": "2"
+                },
+                "id": 73
+            },
+            {
+                "position": 1,
+                "created": "12/02/2017",
+                "type": "CancellationItem",
+                "version": 0,
+                "quantity": 13,
+                "product": {
+                    "name": "Jurek destroyer",
+                    "productType": "PRODUCT",
+                    "productNumber": "56026"
+                },
+                "predecessor": 68,
+                "rootLineItem": {
+                    "documentNo": "B22",
+                    "position": "1"
+                },
+                "id": 74
+            }
+        ],
+        "vatRate": 0.19
+    },
+    {
         "id": "L11",
         "created": "12/02/2017",
         "type": "DeliveryNotes",
@@ -728,6 +758,11 @@ const rawDocuments = [
                 "quantity": 2,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Amy Fleece",
+                    "productType": "PRODUCT",
+                    "productNumber": "75195"
+                },
                 "predecessor": 32,
                 "rootLineItem": {
                     "documentNo": "B11",
@@ -743,6 +778,11 @@ const rawDocuments = [
                 "quantity": 2,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
                 "predecessor": 34,
                 "rootLineItem": {
                     "documentNo": "B11",
@@ -782,21 +822,6 @@ const rawDocuments = [
         "version": 0,
         "items": [
             {
-                "position": 2,
-                "created": "12/02/2017",
-                "type": "ShippingItem",
-                "version": 0,
-                "quantity": 3,
-                "packageNumber": null,
-                "trackNumber": null,
-                "predecessor": 34,
-                "rootLineItem": {
-                    "documentNo": "B11",
-                    "position": "2"
-                },
-                "id": 48
-            },
-            {
                 "position": 1,
                 "created": "12/02/2017",
                 "type": "ShippingItem",
@@ -804,12 +829,37 @@ const rawDocuments = [
                 "quantity": 3,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Amy Fleece",
+                    "productType": "PRODUCT",
+                    "productNumber": "75195"
+                },
                 "predecessor": 32,
                 "rootLineItem": {
                     "documentNo": "B11",
                     "position": "1"
                 },
                 "id": 49
+            },
+            {
+                "position": 2,
+                "created": "12/02/2017",
+                "type": "ShippingItem",
+                "version": 0,
+                "quantity": 3,
+                "packageNumber": null,
+                "trackNumber": null,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
+                "predecessor": 34,
+                "rootLineItem": {
+                    "documentNo": "B11",
+                    "position": "2"
+                },
+                "id": 48
             }
         ],
         "shippedAddress": {
@@ -850,6 +900,11 @@ const rawDocuments = [
                 "quantity": 1,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Salome stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "33025"
+                },
                 "predecessor": 30,
                 "rootLineItem": {
                     "documentNo": "B12",
@@ -865,6 +920,11 @@ const rawDocuments = [
                 "quantity": 5,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Jurek destroyer",
+                    "productType": "PRODUCT",
+                    "productNumber": "56026"
+                },
                 "predecessor": 33,
                 "rootLineItem": {
                     "documentNo": "B12",
@@ -911,6 +971,11 @@ const rawDocuments = [
                 "quantity": 5,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
                 "predecessor": 31,
                 "rootLineItem": {
                     "documentNo": "B11",
@@ -957,6 +1022,11 @@ const rawDocuments = [
                 "quantity": 15,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
                 "predecessor": 31,
                 "rootLineItem": {
                     "documentNo": "B11",
@@ -972,6 +1042,11 @@ const rawDocuments = [
                 "quantity": 8,
                 "packageNumber": null,
                 "trackNumber": null,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
                 "predecessor": 43,
                 "rootLineItem": {
                     "documentNo": "B15",
@@ -1011,19 +1086,24 @@ const rawDocuments = [
         "version": 1,
         "items": [
             {
-                "position": 3,
+                "position": 2,
                 "created": "12/02/2017",
                 "type": "ConfirmationItem",
                 "version": 0,
-                "quantity": 30,
+                "quantity": 15,
                 "pending": false,
                 "agreed": true,
-                "predecessor": 16,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
+                "predecessor": 15,
                 "rootLineItem": {
                     "documentNo": "B11",
-                    "position": "3"
+                    "position": "2"
                 },
-                "id": 31
+                "id": 34
             },
             {
                 "position": 5,
@@ -1033,12 +1113,37 @@ const rawDocuments = [
                 "quantity": 5,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Jurek destroyer",
+                    "productType": "PRODUCT",
+                    "productNumber": "56026"
+                },
                 "predecessor": 19,
                 "rootLineItem": {
                     "documentNo": "B12",
                     "position": "2"
                 },
                 "id": 33
+            },
+            {
+                "position": 3,
+                "created": "12/02/2017",
+                "type": "ConfirmationItem",
+                "version": 0,
+                "quantity": 30,
+                "pending": false,
+                "agreed": true,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
+                "predecessor": 16,
+                "rootLineItem": {
+                    "documentNo": "B11",
+                    "position": "3"
+                },
+                "id": 31
             },
             {
                 "position": 4,
@@ -1048,6 +1153,11 @@ const rawDocuments = [
                 "quantity": 12,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Salome stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "33025"
+                },
                 "predecessor": 18,
                 "rootLineItem": {
                     "documentNo": "B12",
@@ -1063,27 +1173,17 @@ const rawDocuments = [
                 "quantity": 10,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Amy Fleece",
+                    "productType": "PRODUCT",
+                    "productNumber": "75195"
+                },
                 "predecessor": 14,
                 "rootLineItem": {
                     "documentNo": "B11",
                     "position": "1"
                 },
                 "id": 32
-            },
-            {
-                "position": 2,
-                "created": "12/02/2017",
-                "type": "ConfirmationItem",
-                "version": 0,
-                "quantity": 15,
-                "pending": false,
-                "agreed": true,
-                "predecessor": 15,
-                "rootLineItem": {
-                    "documentNo": "B11",
-                    "position": "2"
-                },
-                "id": 34
             }
         ],
         "customerDetails": {
@@ -1142,42 +1242,17 @@ const rawDocuments = [
                 "quantity": 4,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
                 "predecessor": 23,
                 "rootLineItem": {
                     "documentNo": "B13",
                     "position": "1"
                 },
                 "id": 38
-            },
-            {
-                "position": 4,
-                "created": "12/02/2017",
-                "type": "ConfirmationItem",
-                "version": 0,
-                "quantity": 6,
-                "pending": false,
-                "agreed": true,
-                "predecessor": 21,
-                "rootLineItem": {
-                    "documentNo": "B13",
-                    "position": "4"
-                },
-                "id": 36
-            },
-            {
-                "position": 3,
-                "created": "12/02/2017",
-                "type": "ConfirmationItem",
-                "version": 0,
-                "quantity": 8,
-                "pending": false,
-                "agreed": true,
-                "predecessor": 22,
-                "rootLineItem": {
-                    "documentNo": "B13",
-                    "position": "3"
-                },
-                "id": 37
             },
             {
                 "position": 2,
@@ -1187,12 +1262,57 @@ const rawDocuments = [
                 "quantity": 27,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Jurek destroyer",
+                    "productType": "PRODUCT",
+                    "productNumber": "56026"
+                },
                 "predecessor": 24,
                 "rootLineItem": {
                     "documentNo": "B13",
                     "position": "2"
                 },
                 "id": 39
+            },
+            {
+                "position": 3,
+                "created": "12/02/2017",
+                "type": "ConfirmationItem",
+                "version": 0,
+                "quantity": 8,
+                "pending": false,
+                "agreed": true,
+                "product": {
+                    "name": "Salome stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "33025"
+                },
+                "predecessor": 22,
+                "rootLineItem": {
+                    "documentNo": "B13",
+                    "position": "3"
+                },
+                "id": 37
+            },
+            {
+                "position": 4,
+                "created": "12/02/2017",
+                "type": "ConfirmationItem",
+                "version": 0,
+                "quantity": 6,
+                "pending": false,
+                "agreed": true,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
+                "predecessor": 21,
+                "rootLineItem": {
+                    "documentNo": "B13",
+                    "position": "4"
+                },
+                "id": 36
             }
         ],
         "customerDetails": {
@@ -1244,21 +1364,6 @@ const rawDocuments = [
         "version": 1,
         "items": [
             {
-                "position": 1,
-                "created": "12/02/2017",
-                "type": "ConfirmationItem",
-                "version": 0,
-                "quantity": 5,
-                "pending": false,
-                "agreed": true,
-                "predecessor": 26,
-                "rootLineItem": {
-                    "documentNo": "B15",
-                    "position": "1"
-                },
-                "id": 41
-            },
-            {
                 "position": 3,
                 "created": "12/02/2017",
                 "type": "ConfirmationItem",
@@ -1266,6 +1371,11 @@ const rawDocuments = [
                 "quantity": 3,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Salome stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "33025"
+                },
                 "predecessor": 28,
                 "rootLineItem": {
                     "documentNo": "B15",
@@ -1281,12 +1391,37 @@ const rawDocuments = [
                 "quantity": 8,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
                 "predecessor": 27,
                 "rootLineItem": {
                     "documentNo": "B15",
                     "position": "2"
                 },
                 "id": 43
+            },
+            {
+                "position": 1,
+                "created": "12/02/2017",
+                "type": "ConfirmationItem",
+                "version": 0,
+                "quantity": 5,
+                "pending": false,
+                "agreed": true,
+                "product": {
+                    "name": "Miladka athra stars lime",
+                    "productType": "PRODUCT",
+                    "productNumber": "28189"
+                },
+                "predecessor": 26,
+                "rootLineItem": {
+                    "documentNo": "B15",
+                    "position": "1"
+                },
+                "id": 41
             }
         ],
         "customerDetails": {
@@ -1338,21 +1473,6 @@ const rawDocuments = [
         "version": 0,
         "items": [
             {
-                "position": 1,
-                "created": "12/02/2017",
-                "type": "ConfirmationItem",
-                "version": 0,
-                "quantity": 6,
-                "pending": false,
-                "agreed": false,
-                "predecessor": 67,
-                "rootLineItem": {
-                    "documentNo": "B22",
-                    "position": "2"
-                },
-                "id": 71
-            },
-            {
                 "position": 2,
                 "created": "12/02/2017",
                 "type": "ConfirmationItem",
@@ -1360,12 +1480,37 @@ const rawDocuments = [
                 "quantity": 13,
                 "pending": false,
                 "agreed": false,
+                "product": {
+                    "name": "Jurek destroyer",
+                    "productType": "PRODUCT",
+                    "productNumber": "56026"
+                },
                 "predecessor": 68,
                 "rootLineItem": {
                     "documentNo": "B22",
                     "position": "1"
                 },
                 "id": 70
+            },
+            {
+                "position": 1,
+                "created": "12/02/2017",
+                "type": "ConfirmationItem",
+                "version": 0,
+                "quantity": 6,
+                "pending": false,
+                "agreed": false,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
+                "predecessor": 67,
+                "rootLineItem": {
+                    "documentNo": "B22",
+                    "position": "2"
+                },
+                "id": 71
             }
         ],
         "customerDetails": {
@@ -1419,6 +1564,11 @@ const rawDocuments = [
                 "quantity": 6,
                 "pending": false,
                 "agreed": true,
+                "product": {
+                    "name": "Paul anthra dots",
+                    "productType": "PRODUCT",
+                    "productNumber": "43092"
+                },
                 "predecessor": 76,
                 "rootLineItem": {
                     "documentNo": "B31",
@@ -1464,15 +1614,17 @@ const rawDocuments = [
         "vatRate": 0.19
     }
 ]
+
+
 export default rawDocuments
 
-export function createNormalizedTestData(){
+export function createNormalizedTestData() {
     let nDocuments = {};
     let nLineItems = {};
     rawDocuments.forEach((givenSchema) => {
         const { document, lineItems } = normalizeDocument(givenSchema)
-        nDocuments = { ...nDocuments, [document.id] : document }
+        nDocuments = { ...nDocuments, [document.id]: document }
         nLineItems = { ...nLineItems, ...lineItems }
     })
-    return {documents: nDocuments, lineItems: nLineItems}
+    return { documents: nDocuments, lineItems: nLineItems }
 }
