@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 export function createClosureRetrieveChildrenOfItem(allLineItems) {
     return itemId =>
         Object.keys(allLineItems)
