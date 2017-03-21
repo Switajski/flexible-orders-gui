@@ -4,7 +4,6 @@ import { Card } from 'elemental'
 import styled from 'styled-components'
 import { Pill, Spinner } from 'elemental'
 
-import createClosureRetrieveChildrenOfItem from './childrenByParent'
 import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
 import {
@@ -15,6 +14,7 @@ import {
     fetchingDocs,
     fetchDocsFailed
 } from './actions'
+import { createClosureRetrieveChildrenOfItem } from './selectors'
 
 const Centered = styled.div`
     text-align:center`
@@ -31,29 +31,6 @@ export class DocumentList extends Component {
         }
     }
 
-    componentDidMount = () => {
-
-        this.props.dispatch(fetchingDocs)
-        fetch('/documents')
-            .then(response => {
-                const start = Date.now()
-                while (Date.now() < start + 3000) { }
-                if (!response.ok) {
-                    throw Error('Network response was not ok');
-                } else {
-                    return response.json()
-                }
-            })
-            .then(response => {
-                this.props.dispatch(fetchDocsSuccess(response))
-            })
-            .catch(err => {
-                this.props.dispatch(
-                    fetchDocsFailed('Could not fetch documents from server: ' + err.message)
-                )
-            })
-    }
-
     clearFilterDueItems = (evt, button) => {
         this.props.dispatch(clearDueItemsFilter);
     }
@@ -63,40 +40,41 @@ export class DocumentList extends Component {
     }
 
     render = () => {
-        let showDueItemsOnly = false
-        if (this.props.filter) {
-            if (this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY))
-                showDueItemsOnly = true
-        }
-
-        // TODO: code below could be obsolete by a normalized data structure in state
         let docs = undefined;
-        if (this.props.documents) {
-            const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(this.props.documents);
-            docs = Object.keys(this.props.documents).map(key => {
-                const doc = this.props.documents[key];
-                const due = documentIsDue(doc, retrieveChildrenOfItem)
+        let showDueItemsOnly = this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY) ? true : false;
 
-                const DocumentInCard =
-                    <Card key={key}>
-                        <Document
-                            childrenByParent={retrieveChildrenOfItem}
-                            document={doc}
-                            filter={this.props.filter}
-                            showDueItemsOnly={showDueItemsOnly} />
-                    </Card>
+        const lis = this.props.lineItems;
+        const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(lis);
 
-                if (showDueItemsOnly) {
-                    if (due) {
-                        return DocumentInCard
-                    } else {
-                        return <div key={key} />
-                    }
+        docs = Object.keys(this.props.documents).map(key => {
+            const doc = this.props.documents[key];
+            const lineItems = Object.keys(lis)
+                .map(key => lis[key])
+                .filter(li => li.docId === doc.id)
+            const due = documentIsDue(
+                lineItems,
+                retrieveChildrenOfItem)
+
+            const DocumentInCard =
+                <Card key={key}>
+                    <Document
+                        childrenByParent={retrieveChildrenOfItem}
+                        document={doc}
+                        lineItems={lineItems}
+                        filter={this.props.filter}
+                        showDueItemsOnly={showDueItemsOnly} />
+                </Card>
+
+            if (showDueItemsOnly) {
+                if (due) {
+                    return DocumentInCard
+                } else {
+                    return <div key={key} />
                 }
+            }
 
-                return DocumentInCard
-            })
-        }
+            return DocumentInCard
+        })
 
         return (
             <div>

@@ -1,24 +1,29 @@
 import { documentIsDue, dueQty } from '../isDueSpecification';
- 
-import documents, { createClosureRetieveDocById } from './testDocuments';
-import createClosureRetrieveChildrenOfItem from '../childrenByParent'
+import { createNormalizedTestData } from './testDocuments';
+import { createClosureRetrieveChildrenOfItem, createClosureRetrieveLineItemsByDocId } from '../selectors'
 
-const retrieveDocById = createClosureRetieveDocById();
-const retrieveChildrenByParent = createClosureRetrieveChildrenOfItem(documents);
+describe('DocumentList', () => {
+  const { documents, lineItems } = createNormalizedTestData()
+  const retrieveChildrenByParent = createClosureRetrieveChildrenOfItem(lineItems)
+  const retrieveLineItemsByDocId = createClosureRetrieveLineItemsByDocId(lineItems);
 
-it('B11 should not be due', () => {
-  const due = documentIsDue(retrieveDocById
-('B11'), retrieveChildrenByParent)
-  expect(due).toBeFalsy()
-});
+  it('B11 should not be due', () => {
+    console.log(retrieveLineItemsByDocId('B11'))
+    const due = documentIsDue(
+      retrieveLineItemsByDocId('B11'),
+      retrieveChildrenByParent
+    )
+    expect(due).toBeFalsy()
+  });
 
-it('B21 should be due', () => {
-  const due = documentIsDue(retrieveDocById
-('B21'), retrieveChildrenByParent)
-  expect(due).toBeTruthy()
-});
+  it('B21 should be due', () => {
+    const due = documentIsDue(
+      retrieveLineItemsByDocId('B21'), 
+      retrieveChildrenByParent)
+    expect(due).toBeTruthy()
+  });
 
-it(`Item of AB11 should be partly due:
+  it(`Item of AB11 should be partly due:
  AB11:
  #32 10  -> L11#45 2
          -> L12#49 3
@@ -34,8 +39,7 @@ it(`Item of AB11 should be partly due:
          -> L15#57 15
  #30 12  -> L13#52 1
  #33 5   -> L13#51 5`
-  , () => {
-    const item32 = retrieveDocById
-  ('AB11').items.filter(item => item.id === 32)[0]
-    expect(dueQty(item32, retrieveChildrenByParent)).toBe(5)
-  });
+    , () => {
+      expect(dueQty(lineItems['32'], retrieveChildrenByParent)).toBe(5)
+    });
+})

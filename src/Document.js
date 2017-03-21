@@ -3,10 +3,9 @@ import { Table } from 'elemental'
 import { itemIsDue, dueQty } from './isDueSpecification'
 
 import LineItem from './LineItem'
-import { SHOWING_DUE_ITEMS_ONLY } from './actions'
 
 export default function Document(props) {
-    const items = props.document.items
+    const items = props.lineItems
     
     items.sort((a, b) => a.position - b.position)
     if (props.showDueItemsOnly)
@@ -31,7 +30,7 @@ export default function Document(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.document.items.map(item =>
+                    {items.map(item =>
                         <LineItem {...item}
                             key={item.id}
                             dueQty={dueQty(item, props.childrenByParent)}

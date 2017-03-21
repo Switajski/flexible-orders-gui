@@ -7,10 +7,16 @@ import {
     FETCH_DOCS_FAILED
 } from './actions'
 
-const initialState = {
-    documents: {},
-    filter: [SHOWING_DUE_ITEMS_ONLY],
+// TODO: only test data - remove after docs are fetched from server
+import { createNormalizedTestData } from './test/testDocuments'
+import { normalizeDocument } from './normalizer'
 
+const { documents, lineItems } = createNormalizedTestData()
+
+const initialState = {
+    documents: documents,
+    lineItems: lineItems,
+    filter: [SHOWING_DUE_ITEMS_ONLY],
     errors: []
 }
 

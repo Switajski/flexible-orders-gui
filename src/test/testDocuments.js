@@ -15,8 +15,9 @@
  *  #33 5   -> L13#51 5
  * 
  */
+import {normalizeDocument} from '../normalizer'
 
-const documents = [
+const rawDocuments = [
     {
         "id": "B11",
         "created": "12/02/2017",
@@ -1463,12 +1464,15 @@ const documents = [
         "vatRate": 0.19
     }
 ]
-export default documents
+export default rawDocuments
 
-export function createClosureRetieveDocById(){
-    const indexedDocs = {};
-    documents.forEach((doc) => {
-        indexedDocs[doc['id']] = doc
+export function createNormalizedTestData(){
+    let nDocuments = {};
+    let nLineItems = {};
+    rawDocuments.forEach((givenSchema) => {
+        const { document, lineItems } = normalizeDocument(givenSchema)
+        nDocuments = { ...nDocuments, [document.id] : document }
+        nLineItems = { ...nLineItems, ...lineItems }
     })
-    return (id) => indexedDocs[id]
+    return {documents: nDocuments, lineItems: nLineItems}
 }

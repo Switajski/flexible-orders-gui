@@ -1,21 +1,26 @@
-export const dueQty = (item, retrieveChildrenOfItem) => {
-    if (retrieveChildrenOfItem(item.id).length === 0) {
+export const dueQty = (item, childrenOfItemSelector) => {
+    if (childrenOfItemSelector(item.id).length === 0) {
         return item.quantity;
     } else {
         const summedQtyOfChildren =
-            retrieveChildrenOfItem(item.id).reduce((acc, child) => {
+            childrenOfItemSelector(item.id).reduce((acc, child) => {
                 return acc + child.quantity
             }, 0);
         return (item.quantity - summedQtyOfChildren)
     }
 }
 
-export const itemIsDue = (item, retrieveChildrenOfItem) => {
-    return 0 < dueQty(item, retrieveChildrenOfItem); 
+export const itemIsDue = (item, childrenOfItemSelector) => {
+    return 0 < dueQty(item, childrenOfItemSelector); 
 }
 
-export const documentIsDue = (document, retrieveChildrenOfItem) => {
-    const dues = document.items.map(item => itemIsDue(item, retrieveChildrenOfItem))
+/**
+ * TODO: is the parameter of allItems replaceable a state provided by a higher order function?
+ * @param {*} allItems 
+ * @param {*} childrenOfItemSelector 
+ */
+export const documentIsDue = (lineItems, childrenOfItemSelector) => {
+    const dues = lineItems.map(item => itemIsDue(item, childrenOfItemSelector))
 
     return dues.reduce((acc = false, bool) => {
         if (bool)
