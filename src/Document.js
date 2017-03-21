@@ -1,19 +1,29 @@
 import React, { PropTypes } from 'react'
 import { Table } from 'elemental'
 import { itemIsDue, dueQty } from './isDueSpecification'
+import Address from './Address'
+import Customer from './Customer'
 
 import LineItem from './LineItem'
 
 export default function Document(props) {
     const items = props.lineItems
-    
+
     items.sort((a, b) => a.position - b.position)
     if (props.showDueItemsOnly)
         items.filter(item => itemIsDue(item, props.childrenByParent))
 
     return (
         <div>
-            {props.document.id}
+            <h4>{props.document.id}</h4>
+            {props.document.customer &&
+                <Customer {...props.document.customer} />}
+            {props.document.invoiceAddress &&
+                <Address {...props.document.invoiceAddress} heading={'Invoice address'} />}
+            {props.document.shippingAddress &&
+                <Address {...props.document.shippingAddress} heading={'Shipping address'} />}
+            {props.document.purchaseAgreement && props.document.purchaseAgreement.shippingAddress &&
+                <Address {...props.document.purchaseAgreement.shippingAddress} heading={'Shipping address'} />}
             <Table>
                 <colgroup>
                     <col width="20" />
