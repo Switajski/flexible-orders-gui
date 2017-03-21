@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { Alert } from 'elemental'
 
-import logo from './logo.svg'
 import DocumentList from './DocumentList'
 
 const Content = styled.div`

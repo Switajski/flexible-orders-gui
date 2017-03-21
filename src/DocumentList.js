@@ -80,8 +80,8 @@ export class DocumentList extends Component {
                     onClear={this.clearFilterDueItems}
                     onClick={this.filterDueItems} />
 
+                {docs}
                 <Centered>
-                    {docs}
                     {this.props.FETCHING_DOCS && <Spinner size="lg" />}
                 </Centered>
             </div>)
