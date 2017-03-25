@@ -18,7 +18,12 @@ const initialState = {
     lineItems: lineItems,
     selectedLineItems: [],
     filter: [SHOWING_DUE_ITEMS_ONLY],
-    errors: []
+    errors: [],
+
+    // State for input query
+    // TODO: move to separate reducer
+    suggestions: [],
+    value: ''
 }
 
 export default (state = initialState, action) => {

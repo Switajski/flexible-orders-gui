@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card } from 'elemental'
 import styled from 'styled-components'
-import { Pill, Spinner } from 'elemental'
+import { Spinner } from 'elemental'
 
 import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
 import {
-    showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
-    clearDueItemsFilter, CLEARING_DUE_FILTER,
-    selectLineItem
+    selectLineItem, SHOWING_DUE_ITEMS_ONLY
 } from './actions'
 import {
     createClosureRetrieveChildrenOfItem,
@@ -20,24 +18,6 @@ const Centered = styled.div`
     text-align:center`
 
 export class DocumentList extends Component {
-
-    onDueDropdownSelect = (event) => {
-        switch (event) {
-            case SHOWING_DUE_ITEMS_ONLY:
-                return this.props.dispatch(showDueItemsOnly)
-            case CLEARING_DUE_FILTER:
-                return this.props.dispatch(clearDueItemsFilter)
-            default: return false;
-        }
-    }
-
-    clearFilterDueItems = (evt, button) => {
-        this.props.dispatch(clearDueItemsFilter);
-    }
-
-    filterDueItems = (evt, button) => {
-        this.props.dispatch(showDueItemsOnly);
-    }
 
     onLineItemSelect = (id) => {
         this.props.dispatch(selectLineItem(id))
@@ -83,10 +63,6 @@ export class DocumentList extends Component {
 
         return (
             <div>
-                <Pill label='due items only' type="primary"
-                    onClear={this.clearFilterDueItems}
-                    onClick={this.filterDueItems} />
-
                 {docs}
                 <Centered>
                     {this.props.FETCHING_DOCS && <Spinner size="lg" />}
