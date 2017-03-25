@@ -33,18 +33,25 @@ export default function Document(props) {
                 </colgroup>
                 <thead>
                     <tr>
-                        <th><label><input type="checkbox" /></label></th>
+                        <th><label><input type="checkbox" onClick={() => {
+                            props.lineItems.forEach((item) => 
+                            props.onLineItemSelect(item.id))
+                        }} /></label></th>
                         <th>Pos</th>
                         <th>Product</th>
                         <th>Qty</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map(item =>
-                        <LineItem {...item}
+                    {items.map(function (item) {
+                        return <LineItem {...item}
                             key={item.id}
+                            selected={props.selectedLineItems.indexOf(item.id) > -1 ? true : false}
+                            onLineItemSelect={props.onLineItemSelect}
                             dueQty={dueQty(item, props.childrenByParent)}
-                            showDueItemsOnly={props.showDueItemsOnly} />)}
+                            showDueItemsOnly={props.showDueItemsOnly} />
+
+                    })}
                 </tbody>
             </Table>
         </div>
@@ -54,5 +61,6 @@ export default function Document(props) {
 Document.propTypes = {
     childrenByParent: PropTypes.func,
     document: PropTypes.object,
-    filter: PropTypes.array
+    filter: PropTypes.array,
+    selected: PropTypes.bool
 }

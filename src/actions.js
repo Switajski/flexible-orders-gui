@@ -4,6 +4,7 @@ export const SHOWING_ERROR = 'SHOWING_ERROR'
 export const FETCH_DOCS_SUCCESS = 'FETCH_DOCS_SUCCESS'
 export const FETCH_DOCS_FAILED = 'FETCH_DOCS_FAILED'
 export const FETCHING_DOCS = 'FETCHING_DOCS'
+export const SELECT_LINE_ITEM = 'SELECT_LINE_ITEM'
 
 export const showDueItemsOnly = {
     type: SHOWING_DUE_ITEMS_ONLY
@@ -17,6 +18,13 @@ export const showError = msg => {
     return {
         type: SHOWING_ERROR,
         msg: msg
+    }
+}
+
+export const selectLineItem = id => {
+    return {
+        type: SELECT_LINE_ITEM,
+        id: id
     }
 }
 

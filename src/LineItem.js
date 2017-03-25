@@ -20,7 +20,7 @@ export default function LineItem(props) {
     const due = props.dueQty > 0;
     return (
         <tr key={props.id}>
-            {due ? <td><input type="checkbox" /></td> : <td></td>}
+            {due ? <td><input type="checkbox" checked={props.selected} onClick={() => props.onLineItemSelect(props.id)}/></td> : <td></td>}
             <td>{props.position}</td>
             <td>{product.productNumber} - {product.name}</td>
             <QtyTd />

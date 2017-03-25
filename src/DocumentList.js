@@ -8,7 +8,8 @@ import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
 import {
     showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
-    clearDueItemsFilter, CLEARING_DUE_FILTER
+    clearDueItemsFilter, CLEARING_DUE_FILTER,
+    selectLineItem
 } from './actions'
 import {
     createClosureRetrieveChildrenOfItem,
@@ -38,6 +39,10 @@ export class DocumentList extends Component {
         this.props.dispatch(showDueItemsOnly);
     }
 
+    onLineItemSelect = (id) => {
+        this.props.dispatch(selectLineItem(id))
+    }
+
     render = () => {
         let docs = undefined;
         let showDueItemsOnly = this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY) ? true : false;
@@ -59,6 +64,8 @@ export class DocumentList extends Component {
                         childrenByParent={retrieveChildrenOfItem}
                         document={doc}
                         lineItems={lineItems}
+                        onLineItemSelect={this.onLineItemSelect}
+                        selectedLineItems={this.props.selectedLineItems}
                         filter={this.props.filter}
                         showDueItemsOnly={showDueItemsOnly} />
                 </Card>
