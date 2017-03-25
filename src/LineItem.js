@@ -1,4 +1,14 @@
 import React, { PropTypes } from 'react'
+import styled from 'styled-components'
+import image from './line-256.png'
+
+const SpanStrikedThrough = styled.span`
+background-image: url(${image});
+background-size:cover`
+
+const TdWithNoLineWrap = styled.td`
+white-space: nowrap;
+text-align:right`
 
 export default function LineItem(props) {
     let product = {
@@ -9,18 +19,20 @@ export default function LineItem(props) {
         product = props.product
     }
 
-    let QtyTd = () => (<td>{props.quantity}</td>)
+    let QtyTd = () => (<TdWithNoLineWrap>{props.quantity}</TdWithNoLineWrap>)
     if (props.showDueItemsOnly) {
         QtyTd = () => (
-            <td>
-                {(props.dueQty === props.quantity || props.dueQty === 0) ? '' : props.dueQty + '/'}{props.quantity}
-            </td>)
+            <TdWithNoLineWrap>
+                {props.dueQty}
+                {(props.dueQty !== props.quantity) &&
+                    <SpanStrikedThrough> {props.quantity}</SpanStrikedThrough>}
+            </TdWithNoLineWrap>)
     }
 
     const due = props.dueQty > 0;
     return (
         <tr key={props.id}>
-            {due ? <td><input type="checkbox" checked={props.selected} onClick={() => props.onLineItemSelect(props.id)}/></td> : <td></td>}
+            {due ? <td><input type="checkbox" checked={props.selected} onClick={() => props.onLineItemSelect(props.id)} /></td> : <td></td>}
             <td>{props.position}</td>
             <td>{product.productNumber} - {product.name}</td>
             <QtyTd />
