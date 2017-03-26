@@ -7,8 +7,8 @@ import QueryInput from './QueryInput/'
 import DocumentList from './DocumentList'
 
 import {
-  showDueItemsOnly, SHOWING_DUE_ITEMS_ONLY,
-  clearDueItemsFilter, CLEARING_DUE_FILTER
+  showDueItemsOnly,
+  clearDueItemsFilter,
 } from './actions'
 
 
@@ -20,10 +20,12 @@ const Content = styled.div`
   padding-right: 20px;`
 
 const Row = styled.div`
-  display: table;`
+  display: table;
+  border-spacing: 10px`
 
 const Column = styled.div`
-  display: table-cell;`
+  display: table-cell;
+  vertical-align: top`
 
 class App extends Component {
 
