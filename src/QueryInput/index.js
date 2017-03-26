@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest'
 
+import {fetchSuggestions} from './actions'
+
 /**
  * Code from http://codepen.io/moroshko/pen/ZQLyNK?editors=0010#0
  */
@@ -17,8 +19,8 @@ class QueryInput extends Component {
         );
     }
 
-    onSuggestionsFetchRequested = () => {
-
+    onSuggestionsFetchRequested = (typedChars) => {
+        this.props.dispatch(fetchSuggestions(typedChars))
     }
 
     onSuggestionsClearRequested = () => {
@@ -51,4 +53,4 @@ class QueryInput extends Component {
     }
 }
 
-export default connect(state => state)(QueryInput)
+export default connect(state => state.query)(QueryInput)

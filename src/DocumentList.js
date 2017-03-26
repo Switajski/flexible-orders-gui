@@ -72,7 +72,7 @@ export class DocumentList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return state
+    return {...state.docList}
 }
 export default connect(mapStateToProps)(DocumentList)
 
