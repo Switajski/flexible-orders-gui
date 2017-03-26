@@ -3,20 +3,12 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import {
-    showDueItemsOnly,
-    SHOWING_DUE_ITEMS_ONLY,
     FETCHING_DOCS,
     FETCH_DOCS_SUCCESS
 } from '../actions'
+
 import reducer from '../reducer'
 import documents from './testDocuments'
-
-describe('reducer SHOWING_DUE_ITEMS_ONLY', () => {
-    it('filter state should be set', () => {
-        const reduced = reducer({ filter: [] }, showDueItemsOnly)
-        expect(reduced).toEqual({ filter: [SHOWING_DUE_ITEMS_ONLY] })
-    }) 
-});
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)

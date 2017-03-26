@@ -27,7 +27,7 @@ const Column = styled.div`
   display: table-cell;
   vertical-align: top`
 
-class App extends Component {
+export class App extends Component {
 
   clearFilterDueItems = (evt, button) => {
     this.props.dispatch(clearDueItemsFilter);
