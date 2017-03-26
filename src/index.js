@@ -1,21 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-
-import { createStore, combineReducers } from 'redux';
-import reducer from './reducer';
-import qiReducer from './QueryInput/reducer'
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
+import App from './App';
+import configReducers from './configReducers'
 import './styles.min.css';
 
-const reducers = combineReducers({
-  query: qiReducer,
-  docList: reducer
-})
-
 let store = createStore(
-  reducers,
+  configReducers(),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

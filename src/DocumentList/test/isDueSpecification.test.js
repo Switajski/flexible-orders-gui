@@ -8,7 +8,6 @@ describe('DocumentList', () => {
   const retrieveLineItemsByDocId = createClosureRetrieveLineItemsByDocId(lineItems);
 
   it('B11 should not be due', () => {
-    console.log(retrieveLineItemsByDocId('B11'))
     const due = documentIsDue(
       retrieveLineItemsByDocId('B11'),
       retrieveChildrenByParent

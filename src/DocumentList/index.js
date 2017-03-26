@@ -6,9 +6,8 @@ import { Spinner } from 'elemental'
 
 import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
-import {
-    selectLineItem, SHOWING_DUE_ITEMS_ONLY
-} from './actions'
+import { selectLineItem } from './actions'
+import { SHOWING_DUE_ITEMS_ONLY } from '../actions'
 import {
     createClosureRetrieveChildrenOfItem,
     createClosureRetrieveLineItemsByDocId
@@ -72,7 +71,7 @@ export class DocumentList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {...state.docList}
+    return { ...state.docList, ...state.global }
 }
 export default connect(mapStateToProps)(DocumentList)
 

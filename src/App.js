@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Alert, Pill } from 'elemental'
 
 import QueryInput from './QueryInput/'
-import DocumentList from './DocumentList'
+import DocumentList from './DocumentList/'
 
 import {
   showDueItemsOnly,
@@ -62,4 +62,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => state.docList)(App);
+export default connect(state => state.global)(App);

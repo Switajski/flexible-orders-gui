@@ -2,10 +2,9 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import ReactDOM from 'react-dom';
 
-import { DocumentList } from '../DocumentList'
+import { DocumentList } from '../index'
 import { Pill, Card } from 'elemental'
 import { createNormalizedTestData } from './testDocuments'
-import { showDueItemsOnly } from '../actions'
 
 describe('DocumentList', () => {
     const { documents, lineItems } = createNormalizedTestData();
@@ -16,11 +15,6 @@ describe('DocumentList', () => {
             lineItems={lineItems}
             dispatch={dispatchSpy}
             filter={[]} />)
-
-    it('should dispatch filter due items only when clicking on the pill (Button)', () => {
-        list.find(Pill).simulate('click')
-        expect(dispatchSpy).toHaveBeenCalledWith(showDueItemsOnly)
-    })
 
     it('should render initially all documents', () => {
         expect(list.find(Card).length).toBe(19)
