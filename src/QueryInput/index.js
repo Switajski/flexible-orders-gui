@@ -50,14 +50,12 @@ class QueryInput extends Component {
                 renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps} />
             <div className="status">
-                <strong>Status:</strong> {status}
+                <strong>Status:</strong> {status} {JSON.stringify(this.props.documents2)}
             </div>
         </div>
     }
 }
 
-const mapStateToProps = (state) => {
-    return { ...state.query, documents: state.docList.documents }
-}
+const mapStateToProps = (state) => state.query
 
 export default connect(mapStateToProps)(QueryInput)

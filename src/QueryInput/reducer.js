@@ -5,10 +5,13 @@ import {
     UPDATE_INPUT_VALUE
 } from './actions'
 
+import { createNormalizedTestData } from '../DocumentList/test/testDocuments'
+
+const { documents, lineItems } = createNormalizedTestData();
 const initialState = {
     suggestions: [],
     value: '',
-    documents: {}
+    documents: documents
 }
 
 export default (state = initialState, action) => {
