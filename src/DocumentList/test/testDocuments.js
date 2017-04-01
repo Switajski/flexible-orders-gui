@@ -1633,13 +1633,13 @@ export default rawDocuments
 export function createNormalizedTestData() {
     let nDocuments = {}
     let nLineItems = {}
-    let nCustomer = {}
+    let nCustomers = {}
     rawDocuments.forEach((givenSchema) => {
         const { document, lineItems, customer } = normalizeDocument(givenSchema)
         nDocuments[document.id] = document
         nLineItems = { ...nLineItems, ...lineItems }
         if (customer)
-            nCustomer[customer.id] = customer
+            nCustomers[customer.id] = customer
     })
-    return { documents: nDocuments, lineItems: nLineItems }
+    return { documents: nDocuments, lineItems: nLineItems, customers: nCustomers }
 }

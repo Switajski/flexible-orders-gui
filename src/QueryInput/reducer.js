@@ -8,27 +8,22 @@ import {
 import { createNormalizedTestData } from '../DocumentList/test/testDocuments'
 
 //TODO: If customer would be also normalized, then much of following code could be saved.
-const { documents, lineItems } = createNormalizedTestData();
+const { documents, lineItems, customers } = createNormalizedTestData();
 
-const docArray = [];
-const customerArray = [];
-Object.keys(documents).forEach(key => {
-    const doc = documents[key];
-    docArray.push(doc)
-    if (doc.customer) {
-        const custWithId = { ...doc.customer, id: doc.customer.customerNumber }
-        if (!customerArray.includes(custWithId)) {
-            customerArray.push(custWithId)
-        }
-    }
-})
+const transformToArray = objects => {
+    const array = []
+    Object.keys(objects).forEach(key => {
+        array.push(objects[key])
+    })
+    return array
+}
 
 const initialState = {
     suggestions: [],
     value: '',
     keyValue: {
-        documentIds: docArray,
-        customerLastNames: customerArray
+        documents: transformToArray(documents),
+        customers: transformToArray(customers)
     }
 }
 
@@ -46,13 +41,13 @@ function getMatchingDocumentIds(value, documents) {
     return documents.filter(doc => regex.test(doc.id));
 }
 
-function getMatchingCustomerLastNames(value, customerLastNames) {
+function getMatchingCustomerLastNames(value, customers) {
     const escapedValue = escapeRegexCharacters(value.trim());
     if (escapedValue === '') {
         return [];
     }
     const regex = new RegExp('^' + escapedValue, 'i');
-    return customerLastNames.filter(doc => regex.test(doc.lastName));
+    return customers.filter(doc => regex.test(doc.lastName));
 }
 
 export default (state = initialState, action) => {
@@ -70,8 +65,8 @@ export default (state = initialState, action) => {
             };
 
         case LOAD_SUGGESTIONS_BEGIN:
-            const suggestions = getMatchingDocumentIds(state.value, state.keyValue.documentIds);
-            getMatchingCustomerLastNames(state.value, state.keyValue.customerLastNames).forEach(cln => suggestions.push(cln))
+            const suggestions = getMatchingDocumentIds(state.value, state.keyValue.documents);
+            getMatchingCustomerLastNames(state.value, state.keyValue.customers).forEach(cln => suggestions.push(cln))
 
             return {
                 ...state,
