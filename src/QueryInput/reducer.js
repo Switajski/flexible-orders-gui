@@ -42,6 +42,8 @@ function getMatchingDocumentIds(value, documents) {
 }
 
 function getMatchingCustomerLastNames(value, customers) {
+    if (value === '')
+        return customers;
     const escapedValue = escapeRegexCharacters(value.trim());
     if (escapedValue === '') {
         return [];
@@ -65,13 +67,9 @@ export default (state = initialState, action) => {
             };
 
         case LOAD_SUGGESTIONS_BEGIN:
-            const suggestions = getMatchingDocumentIds(state.value, state.keyValue.documents);
-            getMatchingCustomerLastNames(state.value, state.keyValue.customers).forEach(cln => suggestions.push(cln))
-
             return {
                 ...state,
-                isLoading: true,
-                suggestions: suggestions
+                isLoading: true
             };
 
         case MAYBE_UPDATE_SUGGESTIONS:
@@ -82,10 +80,12 @@ export default (state = initialState, action) => {
                     isLoading: false
                 };
             }
+            // const suggestions = getMatchingDocumentIds(state.value, state.keyValue.documents);
+            const suggestions = getMatchingCustomerLastNames(state.value, state.keyValue.customers)
 
             return {
                 ...state,
-                suggestions: action.suggestions,
+                suggestions: suggestions,
                 isLoading: false
             };
 

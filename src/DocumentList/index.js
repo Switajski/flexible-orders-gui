@@ -24,41 +24,48 @@ export class DocumentList extends Component {
 
     render = () => {
         let docs = undefined;
-        let showDueItemsOnly = this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY) ? true : false;
+        const showDueItemsOnly = this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY) ? true : false;
+        const customerIdFilter = this.props.filters ? this.props.filters.customerId : false;
 
         const lis = this.props.lineItems;
         const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(lis);
         const retrieveLineItemsByDocId = createClosureRetrieveLineItemsByDocId(lis);
 
-        docs = Object.keys(this.props.documents).map(key => {
-            const doc = this.props.documents[key]
-            const lineItems = retrieveLineItemsByDocId(key)
-            const due = documentIsDue(
-                lineItems,
-                retrieveChildrenOfItem)
-
-            const DocumentInCard =
-                <Card key={key}>
-                    <Document
-                        childrenByParent={retrieveChildrenOfItem}
-                        document={doc}
-                        lineItems={lineItems}
-                        onLineItemSelect={this.onLineItemSelect}
-                        selectedLineItems={this.props.selectedLineItems}
-                        filter={this.props.filter}
-                        showDueItemsOnly={showDueItemsOnly} />
-                </Card>
-
-            if (showDueItemsOnly) {
-                if (due) {
-                    return DocumentInCard
-                } else {
-                    return <div key={key} />
+        docs = Object.keys(this.props.documents)
+            .map(key => this.props.documents[key])
+            .map(doc => {
+                const lineItems = retrieveLineItemsByDocId(doc.id)
+                return {
+                    lineItems: lineItems,
+                    due: documentIsDue(
+                        lineItems,
+                        retrieveChildrenOfItem),
+                    document: doc
                 }
-            }
+            })
+            .filter(({ due }) => showDueItemsOnly ? due : true)
+            .filter(({ document }) => {
+                if (customerIdFilter) {
+                    debugger
+                    return document.customerId === customerIdFilter
+                }
+                return true;
+            })
+            .map(({ document, due, lineItems }) => {
+                const DocumentInCard =
+                    <Card key={document.id}>
+                        <Document
+                            childrenByParent={retrieveChildrenOfItem}
+                            document={document}
+                            lineItems={lineItems}
+                            onLineItemSelect={this.onLineItemSelect}
+                            selectedLineItems={this.props.selectedLineItems}
+                            filter={this.props.filter}
+                            showDueItemsOnly={showDueItemsOnly} />
+                    </Card>
 
-            return DocumentInCard
-        })
+                return DocumentInCard
+            })
 
         return (
             <div>

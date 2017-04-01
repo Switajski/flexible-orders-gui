@@ -8,7 +8,7 @@ export const loadSuggestionsBegin = {
 }
 
 export const randomDelay = () => {
-    return 300 + Math.random() * 1000;
+    return 100 + Math.random() * 100;
 }
 
 export const loadSuggestions = (value) => {
@@ -33,10 +33,9 @@ export const clearSuggestions = {
     type: CLEAR_SUGGESTIONS
 }
 
-export const maybeUpdateSuggestions = (suggestions, value) => {
+export const maybeUpdateSuggestions = (value) => {
     return {
         type: MAYBE_UPDATE_SUGGESTIONS,
-        suggestions,
         value
     };
 }
