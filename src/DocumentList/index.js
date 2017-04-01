@@ -12,6 +12,7 @@ import {
     createClosureRetrieveChildrenOfItem,
     createClosureRetrieveLineItemsByDocId
 } from './selectors'
+import { CUSTOMER_ID_FILTER, DUE_ITEMS_ONLY_FILTER } from '../Filter'
 
 const Centered = styled.div`
     text-align:center`
@@ -24,8 +25,12 @@ export class DocumentList extends Component {
 
     render = () => {
         let docs = undefined;
-        const showDueItemsOnly = this.props.filter.find((filter) => filter === SHOWING_DUE_ITEMS_ONLY) ? true : false;
-        const customerIdFilter = this.props.filters ? this.props.filters.customerId : false;
+        const showDueItemsOnly = this.props.filters
+            ? this.props.filters[DUE_ITEMS_ONLY_FILTER]
+            : false;
+        const customerIdFilter = this.props.filters
+            ? parseInt(this.props.filters[CUSTOMER_ID_FILTER])
+            : false;
 
         const lis = this.props.lineItems;
         const retrieveChildrenOfItem = createClosureRetrieveChildrenOfItem(lis);
@@ -46,7 +51,6 @@ export class DocumentList extends Component {
             .filter(({ due }) => showDueItemsOnly ? due : true)
             .filter(({ document }) => {
                 if (customerIdFilter) {
-                    debugger
                     return document.customerId === customerIdFilter
                 }
                 return true;

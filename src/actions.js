@@ -1,5 +1,3 @@
-export const SHOWING_DUE_ITEMS_ONLY = 'SHOWING_DUE_ITEMS_ONLY';
-export const CLEARING_DUE_FILTER = 'CLEARING_DUE_FILTER'
 export const SHOWING_ERROR = 'SHOWING_ERROR'
 export const SET_FILTER = 'SET_FILTER'
 export const UNSET_FILTER = 'UNSET_FILTER'
@@ -11,10 +9,11 @@ export const showError = msg => {
     }
 }
 
-export const setFilter = (filter) => {
+export const setFilter = (filter, value) => {
     return {
         type: SET_FILTER,
-        filter: filter
+        filter: filter,
+        value: value
     }
 }
 
@@ -23,12 +22,4 @@ export const unsetFilter = (filterProp) => {
         type: UNSET_FILTER,
         filterProp: filterProp
     }
-}
-
-export const showDueItemsOnly = {
-    type: SHOWING_DUE_ITEMS_ONLY
-}
-
-export const clearDueItemsFilter = {
-    type: CLEARING_DUE_FILTER
 }

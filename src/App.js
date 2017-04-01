@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { Alert, Pill } from 'elemental'
+import { Alert} from 'elemental'
 
 import QueryInput from './QueryInput/'
 import DocumentList from './DocumentList/'
-
-import {
-  showDueItemsOnly,
-  clearDueItemsFilter,
-} from './actions'
-
 
 const Content = styled.div`
   margin-left: auto;
@@ -19,23 +13,7 @@ const Content = styled.div`
   padding-left: 20px;
   padding-right: 20px;`
 
-const Row = styled.div`
-  display: table;
-  border-spacing: 10px`
-
-const Column = styled.div`
-  display: table-cell;
-  vertical-align: top`
-
 export class App extends Component {
-
-  clearFilterDueItems = (evt, button) => {
-    this.props.dispatch(clearDueItemsFilter);
-  }
-
-  filterDueItems = (evt, button) => {
-    this.props.dispatch(showDueItemsOnly);
-  }
 
   render() {
 
@@ -47,14 +25,7 @@ export class App extends Component {
               <Alert type="danger" key={msg}><strong>Error: </strong>{msg}</Alert>
             ))
           }
-          <Row>
-            <Column><QueryInput /></Column>
-            <Column>
-              <Pill label='due items only' type="primary"
-                onClear={this.clearFilterDueItems}
-                onClick={this.filterDueItems} />
-            </Column>
-          </Row>
+          <QueryInput />
           <DocumentList />
         </Content>
       </div>

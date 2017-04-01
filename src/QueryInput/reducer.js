@@ -1,3 +1,4 @@
+import React from 'react'
 import {
     CLEAR_SUGGESTIONS,
     LOAD_SUGGESTIONS_BEGIN,
@@ -5,6 +6,9 @@ import {
     UPDATE_INPUT_VALUE
 } from './actions'
 
+import CustomerSuggestion from './CustomerSuggestion'
+import StatusSuggestion from './StatusSuggestion'
+import { CUSTOMER_ID_FILTER, DUE_ITEMS_ONLY_FILTER } from '../Filter'
 import { createNormalizedTestData } from '../DocumentList/test/testDocuments'
 
 //TODO: If customer would be also normalized, then much of following code could be saved.
@@ -23,7 +27,8 @@ const initialState = {
     value: '',
     keyValue: {
         documents: transformToArray(documents),
-        customers: transformToArray(customers)
+        customers: transformToArray(customers),
+        status: [{ name: DUE_ITEMS_ONLY_FILTER }]
     }
 }
 
@@ -32,24 +37,30 @@ function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function getMatchingDocumentIds(value, documents) {
-    const escapedValue = escapeRegexCharacters(value.trim());
-    if (escapedValue === '') {
-        return [];
-    }
-    const regex = new RegExp('^' + escapedValue, 'i');
-    return documents.filter(doc => regex.test(doc.id));
-}
+function getMatchingSuggestions(value, keyValue) {
+    const escapedValue = escapeRegexCharacters(value.trim())
+    const allSuggestions = [...keyValue.customers.map(cust => {
+        return {
+            ...cust,
+            render: () => <CustomerSuggestion {...cust} />,
+            getSuggestionValue: () => CUSTOMER_ID_FILTER + ':' + cust.id
+        }
+    }), ...keyValue.status.map(status => {
+        return {
+            ...status,
+            render: () => <StatusSuggestion {...status} />,
+            getSuggestionValue: () => DUE_ITEMS_ONLY_FILTER + ':' + true
+        }
+    })]
 
-function getMatchingCustomerLastNames(value, customers) {
-    if (value === '')
-        return customers;
-    const escapedValue = escapeRegexCharacters(value.trim());
     if (escapedValue === '') {
-        return [];
+        return allSuggestions
     }
-    const regex = new RegExp('^' + escapedValue, 'i');
-    return customers.filter(doc => regex.test(doc.lastName));
+    const regex = new RegExp('^' + escapedValue, 'i')
+    const matchingCustomers = keyValue.customers.filter(cust => regex.test(cust.lastName))
+    const matchingStatus = keyValue.status.filter(status => regex.test(status.name))
+
+    return [...matchingCustomers, ...matchingStatus]
 }
 
 export default (state = initialState, action) => {
@@ -80,8 +91,7 @@ export default (state = initialState, action) => {
                     isLoading: false
                 };
             }
-            // const suggestions = getMatchingDocumentIds(state.value, state.keyValue.documents);
-            const suggestions = getMatchingCustomerLastNames(state.value, state.keyValue.customers)
+            const suggestions = getMatchingSuggestions(state.value, state.keyValue)
 
             return {
                 ...state,
