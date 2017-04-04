@@ -8,7 +8,7 @@ import {
 
 import CustomerSuggestion from './CustomerSuggestion'
 import StatusSuggestion from './StatusSuggestion'
-import { CUSTOMER_ID_FILTER, DUE_ITEMS_ONLY_FILTER } from '../Filter'
+import { CUSTOMER_ID_FILTER, STATUS, STATUS_DUE_ITEMS_ONLY } from '../Filter'
 import { createNormalizedTestData } from '../DocumentList/test/testDocuments'
 
 //TODO: If customer would be also normalized, then much of following code could be saved.
@@ -28,7 +28,7 @@ const initialState = {
     keyValue: {
         documents: transformToArray(documents),
         customers: transformToArray(customers),
-        status: [{ name: DUE_ITEMS_ONLY_FILTER }]
+        status: [{ name: STATUS_DUE_ITEMS_ONLY }]
     }
 }
 
@@ -37,28 +37,32 @@ function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function getMatchingSuggestions(value, keyValue) {
+function createMatchingSuggestions(value, keyValue) {
     const escapedValue = escapeRegexCharacters(value.trim())
-    const allSuggestions = [...keyValue.customers.map(cust => {
-        return {
-            ...cust,
-            render: () => <CustomerSuggestion {...cust} />,
-            getSuggestionValue: () => CUSTOMER_ID_FILTER + ':' + cust.id
-        }
-    }), ...keyValue.status.map(status => {
-        return {
-            ...status,
-            render: () => <StatusSuggestion {...status} />,
-            getSuggestionValue: () => DUE_ITEMS_ONLY_FILTER + ':' + true
-        }
-    })]
+    const customerSuggestions = keyValue.customers
+        .map(cust => {
+            return {
+                ...cust,
+                render: () => <CustomerSuggestion{...cust} />,
+                getValue: () => CUSTOMER_ID_FILTER + ':' + cust.id
+            }
+        })
+    const statusSuggestions = keyValue.status
+        .map(status => {
+            return {
+                ...status,
+                render: () => <StatusSuggestion {...status} />,
+                getValue: () => STATUS + ':' + STATUS_DUE_ITEMS_ONLY
+            }
+        })
 
+    const allSuggestions = [...customerSuggestions, ...statusSuggestions]
     if (escapedValue === '') {
         return allSuggestions
     }
     const regex = new RegExp('^' + escapedValue, 'i')
-    const matchingCustomers = keyValue.customers.filter(cust => regex.test(cust.lastName))
-    const matchingStatus = keyValue.status.filter(status => regex.test(status.name))
+    const matchingCustomers = customerSuggestions.filter(cust => regex.test(cust.lastName))
+    const matchingStatus = statusSuggestions.filter(status => regex.test(status.name))
 
     return [...matchingCustomers, ...matchingStatus]
 }
@@ -91,7 +95,7 @@ export default (state = initialState, action) => {
                     isLoading: false
                 };
             }
-            const suggestions = getMatchingSuggestions(state.value, state.keyValue)
+            const suggestions = createMatchingSuggestions(state.value, state.keyValue)
 
             return {
                 ...state,

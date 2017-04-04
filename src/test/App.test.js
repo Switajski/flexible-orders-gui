@@ -16,7 +16,8 @@ let store = createStore(
 describe('DocumentList', () => {
   const dispatchSpy = jest.fn()
   const list = shallow(
-    <App dispatch={dispatchSpy} errors={[]} />
+    <App dispatch={dispatchSpy} 
+      errors={[]} />
   )
   it('should dispatch filter due items only when clicking on the pill (Button)', () => {
     list.find(Pill).simulate('click')

@@ -12,7 +12,7 @@ import {
     createClosureRetrieveChildrenOfItem,
     createClosureRetrieveLineItemsByDocId
 } from './selectors'
-import { CUSTOMER_ID_FILTER, DUE_ITEMS_ONLY_FILTER } from '../Filter'
+import { CUSTOMER_ID_FILTER, STATUS_DUE_ITEMS_ONLY, STATUS } from '../Filter'
 
 const Centered = styled.div`
     text-align:center`
@@ -26,7 +26,7 @@ export class DocumentList extends Component {
     render = () => {
         let docs = undefined;
         const showDueItemsOnly = this.props.filters
-            ? this.props.filters[DUE_ITEMS_ONLY_FILTER]
+            ? this.props.filters[STATUS]
             : false;
         const customerIdFilter = this.props.filters
             ? parseInt(this.props.filters[CUSTOMER_ID_FILTER])

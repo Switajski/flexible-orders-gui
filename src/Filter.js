@@ -1,2 +1,3 @@
 export const CUSTOMER_ID_FILTER = 'CustomerID'
-export const DUE_ITEMS_ONLY_FILTER = 'DueItemsOnly'
+export const STATUS = 'Status'
+export const STATUS_DUE_ITEMS_ONLY = 'DueItemsOnly'

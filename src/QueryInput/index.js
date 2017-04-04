@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { updateInputValue, loadSuggestions, loadSuggestionsBegin, clearSuggestions } from './actions'
 import { setFilter } from '../actions'
 import autosuggest from './autosuggest.css'
-import { CUSTOMER_ID_FILTER, DUE_ITEMS_ONLY_FILTER } from '../Filter'
+import { CUSTOMER_ID_FILTER, STATUS_DUE_ITEMS_ONLY, STATUS } from '../Filter'
 
 import {
     unsetFilter
@@ -30,10 +30,6 @@ class QueryInput extends Component {
     onUnsetFilter(filter) {
         this.props.dispatch(unsetFilter(filter))
     }
-
-    getSuggestionValue = suggestion => suggestion.getSuggestionValue()
-
-    renderSuggestion = suggestion => suggestion.render()
 
     onSuggestionsFetchRequested = ({ value }) => {
         this.props.dispatch(loadSuggestions(value))
@@ -76,8 +72,8 @@ class QueryInput extends Component {
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                     onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                    getSuggestionValue={this.getSuggestionValue}
-                    renderSuggestion={this.renderSuggestion}
+                    getSuggestionValue={suggestion => suggestion.getValue()}
+                    renderSuggestion={suggestion => suggestion.render()}
                     onSuggestionSelected={this.onSuggestionSelected}
                     alwaysRenderSuggestions={true}
                     inputProps={inputProps} />
@@ -89,9 +85,9 @@ class QueryInput extends Component {
                 {customerFilterValue &&
                     <Pill label={'Customer ID: ' + customerFilterValue} type="primary"
                         onClear={() => this.onUnsetFilter(CUSTOMER_ID_FILTER)} />}
-                {this.getFilterValue(DUE_ITEMS_ONLY_FILTER) &&
+                {this.getFilterValue(STATUS) &&
                     <Pill label='due items only' type="primary"
-                        onClear={() => this.onUnsetFilter(DUE_ITEMS_ONLY_FILTER)} />}
+                        onClear={() => this.onUnsetFilter(STATUS)} />}
             </Column>
         </Row>
     }
