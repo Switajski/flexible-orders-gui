@@ -9,28 +9,7 @@ import {
 import CustomerSuggestion from './CustomerSuggestion'
 import StatusSuggestion from './StatusSuggestion'
 import { CUSTOMER_ID_FILTER, STATUS, STATUS_DUE_ITEMS_ONLY } from '../Filter'
-import { createNormalizedTestData } from '../DocumentList/test/testDocuments'
-
-//TODO: If customer would be also normalized, then much of following code could be saved.
-const { documents, lineItems, customers } = createNormalizedTestData();
-
-const transformToArray = objects => {
-    const array = []
-    Object.keys(objects).forEach(key => {
-        array.push(objects[key])
-    })
-    return array
-}
-
-const initialState = {
-    suggestions: [],
-    value: '',
-    keyValue: {
-        documents: transformToArray(documents),
-        customers: transformToArray(customers),
-        status: [{ name: STATUS_DUE_ITEMS_ONLY }]
-    }
-}
+import { initialState } from './initialState'
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
@@ -47,7 +26,7 @@ function createMatchingSuggestions(value, keyValue) {
                 getValue: () => CUSTOMER_ID_FILTER + ':' + cust.id
             }
         })
-    const statusSuggestions = keyValue.status
+    const statusSuggestions = keyValue[STATUS]
         .map(status => {
             return {
                 ...status,

@@ -13,7 +13,6 @@ export default (state = initialState, action) => {
             const newErrors = [...state.errors, action.msg]
             return { ...state, errors: newErrors }
         case SET_FILTER:
-            const splitted = action.filter.split(':')
             const newFilters = { ...state.filters, [action.filter]: action.value }
             return { ...state, filters: newFilters }
         case UNSET_FILTER:

@@ -4,10 +4,11 @@ import Autosuggest from 'react-autosuggest'
 import { Pill } from 'elemental'
 import styled from 'styled-components'
 
-import { updateInputValue, loadSuggestions, loadSuggestionsBegin, clearSuggestions } from './actions'
+import { updateInputValue, loadSuggestions, clearSuggestions } from './actions'
 import { setFilter } from '../actions'
+// eslint-disable-next-line
 import autosuggest from './autosuggest.css'
-import { CUSTOMER_ID_FILTER, STATUS_DUE_ITEMS_ONLY, STATUS } from '../Filter'
+import { CUSTOMER_ID_FILTER, STATUS } from '../Filter'
 
 import {
     unsetFilter
@@ -25,7 +26,7 @@ const Column = styled.div`
 /**
  * Code from http://codepen.io/moroshko/pen/ZQLyNK?editors=0010#0
  */
-class QueryInput extends Component {
+export class QueryInput extends Component {
 
     onUnsetFilter(filter) {
         this.props.dispatch(unsetFilter(filter))
@@ -36,7 +37,7 @@ class QueryInput extends Component {
     }
 
     onSuggestionsClearRequested = () => {
-
+        this.props.dispatch(clearSuggestions)
     }
 
     onInputChange = (inputValue, { newValue }) => {
@@ -54,7 +55,9 @@ class QueryInput extends Component {
             : false
 
     render = () => {
-        const { value, suggestions, isLoading, onSuggestionsFetchRequested, onSuggestionsClearRequested } = this.props;
+        const { value, suggestions, isLoading, 
+        //    onSuggestionsFetchRequested, onSuggestionsClearRequested 
+        } = this.props;
 
         const status = (isLoading ? 'Loading...' : 'Type to load suggestions');
 

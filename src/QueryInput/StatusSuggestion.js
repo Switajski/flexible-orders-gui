@@ -1,3 +1,9 @@
 import React from 'react'
 
-export default (props) => <span>Status:{props.name}</span>
+const StatusSuggestion = props => <span>Status:{props.name}</span>
+
+StatusSuggestion.propTypes = {
+    name: React.PropTypes.string.isRequired
+}
+
+export default StatusSuggestion

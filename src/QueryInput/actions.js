@@ -11,6 +11,14 @@ export const randomDelay = () => {
     return 100 + Math.random() * 100;
 }
 
+
+export const maybeUpdateSuggestions = (value) => {
+    return {
+        type: MAYBE_UPDATE_SUGGESTIONS,
+        value
+    };
+}
+
 export const loadSuggestions = (value) => {
     return dispatch => {
         dispatch(loadSuggestionsBegin);
@@ -31,11 +39,4 @@ export const updateInputValue = (value) => {
 
 export const clearSuggestions = {
     type: CLEAR_SUGGESTIONS
-}
-
-export const maybeUpdateSuggestions = (value) => {
-    return {
-        type: MAYBE_UPDATE_SUGGESTIONS,
-        value
-    };
 }

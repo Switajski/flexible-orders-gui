@@ -7,12 +7,11 @@ import { Spinner } from 'elemental'
 import Document from './Document'
 import { documentIsDue } from './isDueSpecification'
 import { selectLineItem } from './actions'
-import { SHOWING_DUE_ITEMS_ONLY } from '../actions'
 import {
     createClosureRetrieveChildrenOfItem,
     createClosureRetrieveLineItemsByDocId
 } from './selectors'
-import { CUSTOMER_ID_FILTER, STATUS_DUE_ITEMS_ONLY, STATUS } from '../Filter'
+import { CUSTOMER_ID_FILTER, STATUS } from '../Filter'
 
 const Centered = styled.div`
     text-align:center`
@@ -29,7 +28,7 @@ export class DocumentList extends Component {
             ? this.props.filters[STATUS]
             : false;
         const customerIdFilter = this.props.filters
-            ? parseInt(this.props.filters[CUSTOMER_ID_FILTER])
+            ? parseInt(this.props.filters[CUSTOMER_ID_FILTER], 10)
             : false;
 
         const lis = this.props.lineItems;

@@ -5,6 +5,9 @@ export function normalizeDocument(doc) {
         normalizedItems[item.id] = item;
     })
     // eleminate items, as they are stored separatly
+    // when am obejct is decomposed and the one with remaining properties used, following waring appears:
+    // warning  Unnecessarily computed property ['items'] found    no-useless-computed-key"
+    // eslint-disable-next-line
     const { ['items']: removedItems, ...remainingDoc } = doc
     let customer = undefined;
     if (doc.customer) {

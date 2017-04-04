@@ -1,3 +1,9 @@
 import React from 'react'
 
-export default (props) => (<span>{props.id} - {props.firstName} {props.lastName}</span>)
+const CustomerSuggestion = (props) => (<span>{props.id} - {props.firstName} {props.lastName}</span>)
+
+CustomerSuggestion.propTypes = {
+    id: React.PropTypes.number.isRequired,
+    firstName: React.PropTypes.string.isRequired,
+    lastName: React.PropTypes.string.isRequired
+}
