@@ -7,3 +7,5 @@ CustomerSuggestion.propTypes = {
     firstName: React.PropTypes.string.isRequired,
     lastName: React.PropTypes.string.isRequired
 }
+
+export default CustomerSuggestion

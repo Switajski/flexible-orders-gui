@@ -1,12 +1,13 @@
 import reducer from '../reducer'
 import {
-    showDueItemsOnly,
-    SHOWING_DUE_ITEMS_ONLY
+    setFilter,
+    SET_FILTER
 } from '../actions'
+import { STATUS, STATUS_DUE_ITEMS_ONLY } from '../Filter'
 
-describe('reducer SHOWING_DUE_ITEMS_ONLY', () => {
-    it('filter state should be set', () => {
-        const reduced = reducer({ filter: [] }, showDueItemsOnly)
-        expect(reduced).toEqual({ filter: [SHOWING_DUE_ITEMS_ONLY] })
-    }) 
+describe('reducer set filters', () => {
+    it('status filter should be set', () => {
+        const reduced = reducer({}, setFilter(STATUS, STATUS_DUE_ITEMS_ONLY))
+        expect(reduced).toEqual({filters: {'Status': STATUS_DUE_ITEMS_ONLY}})
+    })
 });

@@ -22,7 +22,8 @@ function createMatchingSuggestions(value, keyValue) {
         .map(cust => {
             return {
                 ...cust,
-                render: () => <CustomerSuggestion{...cust} />,
+                render: () => <CustomerSuggestion
+                    {...cust} />,
                 getValue: () => CUSTOMER_ID_FILTER + ':' + cust.id
             }
         })
