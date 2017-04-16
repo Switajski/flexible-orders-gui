@@ -7,6 +7,7 @@ import Autosuggest from 'react-autosuggest'
 import { QueryInput } from '../index'
 import StatusSuggestion from '../StatusSuggestion'
 import { initialState } from '../initialState'
+import TestUtils from 'react-addons-test-utils'
 
 describe('QueryInput', () => {
     const dispatchSpy = jest.fn()
@@ -15,11 +16,16 @@ describe('QueryInput', () => {
     )
 
     it('should suggest status', () => {
-        //input.find('li').simulate('keydown', { which: 's' })
-        input.find('li').length
-        //expect(input.find(StatusSuggestion).length).toBe(1)
+        input.find(Autosuggest).simulate('keydown', { which: 's' })
+        setTimeout(() => {
+            expect(input.find(StatusSuggestion).length).toBe(1)
+        }, 500)
     })
 })
+
+it('renders Autosuggest', () => {
+    TestUtils.renderIntoDocument(<QueryInput {...initialState} />);
+});
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
