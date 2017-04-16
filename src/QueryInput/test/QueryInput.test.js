@@ -22,7 +22,7 @@ describe('QueryInput', () => {
         }, 500)
     })
 
-    it('should suggest status', () => {
+    it('should not suggest anything unknown', () => {
         input.find(Autosuggest).simulate('keydown', { which: 'f' })
         setTimeout(() => {
             expect(input.find(StatusSuggestion).length).toBe(0)
